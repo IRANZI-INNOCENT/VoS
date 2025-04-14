@@ -145,83 +145,7 @@
             font-size: 16px;
         }
         
-        /* Team Cards */
-        .team-card {
-            transition: all 0.5s ease;
-            position: relative;
-            border-radius: 16px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            perspective: 1000px;
-            height: 520px;
-            background: var(--white);
-            overflow: hidden;
-        }
         
-        .team-card-inner {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .team-card:hover .team-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .team-card-front, .team-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        
-        .team-card-front {
-            background-color: white;
-            padding: 1.5rem;
-        }
-        
-        .team-card-back {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
-            color: white;
-            transform: rotateY(180deg);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .candidate-image {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 4px solid var(--white);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .team-card:hover .candidate-image {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-        
-        .team-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--accent);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 10;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
         
         /* Manifesto Items */
         .manifesto-item {
@@ -238,7 +162,140 @@
             opacity: 1;
             border-left: 4px solid var(--primary);
         }
-        
+        /* Team Section */
+#team {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Team Card Styles */
+.team-card {
+    position: relative;
+    padding-top: 1.5rem; /* Space for badge to sit above content */
+    margin-bottom: 1.5rem;
+}
+
+.team-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FFD700; /* Gold background */
+    color: #000;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem; /* 12px */
+    font-weight: bold;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    z-index: 10; /* Ensures badge is above other elements */
+}
+
+.team-card-inner {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Fixed height for flip effect on larger screens */
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.team-card:hover .team-card-inner {
+    transform: rotateY(180deg); /* Flip effect on hover */
+}
+
+.team-card-front, .team-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    overflow: hidden;
+}
+
+.team-card-back {
+    transform: rotateY(180deg);
+    background-color: #2c3e50; /* Dark background for contrast */
+}
+
+.candidate-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+}
+
+/* Text Styling */
+.team-card-front h3, .team-card-back h3 {
+    margin-bottom: 0.75rem;
+}
+
+.team-card-front p, .team-card-back p {
+    margin-bottom: 1rem;
+}
+
+.team-card-back .quote {
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+}
+
+/* Responsive Adjustments for Small Screens */
+@media (max-width: 640px) {
+    .team-card-inner {
+        height: auto;
+        transform: none !important; /* Disable flip effect */
+    }
+
+    .team-card-front, .team-card-back {
+        position: static;
+        height: auto;
+        transform: none;
+        box-shadow: none; /* Remove shadow for cleaner stacking */
+    }
+
+    .team-card-back {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: #f9f9f9; /* Light background for readability */
+    }
+
+    .candidate-image {
+        height: 150px; /* Smaller image height for compact layout */
+    }
+
+    .team-card {
+        margin-bottom: 2rem;
+    }
+
+    .team-card-front h3, .team-card-back h3 {
+        font-size: 1.25rem; /* 20px */
+    }
+
+    .team-card-front p, .team-card-back p {
+        font-size: 0.875rem; /* 14px */
+    }
+
+    .team-badge {
+        font-size: 0.65rem; /* 10.4px */
+        padding: 0.2rem 0.4rem;
+    }
+
+    .team-grid {
+        gap: 1rem; /* Reduced gap for tighter layout */
+    }
+}
+
+/* Very Small Screens (below 480px) */
+@media (max-width: 480px) {
+    .team-grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr)); /* One column for tiny screens */
+    }
+
+    .candidate-image {
+        height: 120px; /* Even smaller image for very small screens */
+    }
+}
         .manifesto-item:hover {
             background-color: var(--primary-transparent);
             transform: translateY(-5px);
@@ -497,6 +554,7 @@
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
+            margin-bottom: 15px; /* Added margin for better spacing on mobile */
         }
         
         .stat-item.show {
@@ -789,27 +847,29 @@
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
             margin: 30px 0;
+            flex-wrap: wrap;
         }
         
         .countdown-item {
             text-align: center;
-            min-width: 80px;
+            min-width: 70px;
+            margin-bottom: 10px;
         }
         
         .countdown-number {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             background: var(--primary);
             color: white;
             border-radius: 8px;
-            padding: 10px;
+            padding: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80px;
+            height: 60px;
             position: relative;
             overflow: hidden;
         }
@@ -1000,21 +1060,69 @@
             transform: translateY(-9px) rotate(-45deg);
         }
         
-        /* Responsive Adjustments */
+        /* Enhanced Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .hero-section {
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+
+            .text-4xl {
+                font-size: 2.25rem;
+            }
+
+            .py-20 {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+            }
+
+            .countdown-container {
+                gap: 15px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .hero-section {
                 padding-top: 120px;
+                padding-bottom: 30px;
             }
             
             .hero-slider {
                 height: 400px;
+                margin-top: 30px;
             }
             
+            .text-4xl {
+                font-size: 2rem;
+            }
+
+            .text-2xl {
+                font-size: 1.5rem;
+            }
+
+            .text-lg {
+                font-size: 1rem;
+            }
+            
+            .py-20 {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+            
+            /* Team Cards Fixes */
             .team-card {
-                height: auto;
-                margin-bottom: 30px;
+                max-width: 320px;
+                height: 500px;
+                margin: 0 auto 30px;
+                display: block !important;
             }
             
+            .candidate-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            /* Timeline Fixes */
             .timeline-container::before {
                 left: 20px;
                 margin: 0;
@@ -1034,6 +1142,8 @@
             
             .countdown-container {
                 flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
             }
             
             .countdown-item {
@@ -1044,6 +1154,172 @@
                 height: 60px;
                 font-size: 2rem;
             }
+            
+            /* Manifesto Item Fixes */
+            .manifesto-item {
+                padding: 1rem;
+            }
+            
+            /* Stats Items */
+            .stat-item {
+                padding: 1rem;
+            }
+            
+            .stat-counter {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-section {
+                padding-top: 100px;
+                padding-bottom: 20px;
+            }
+            
+            .hero-slider {
+                height: 300px;
+            }
+            
+            .text-4xl {
+                font-size: 1.75rem;
+            }
+            
+            .text-2xl {
+                font-size: 1.25rem;
+            }
+            
+            .py-20 {
+                padding-top: 2.5rem;
+                padding-bottom: 2.5rem;
+            }
+            
+            .px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Team Cards Further Optimizations */
+            .team-card {
+                height: 480px;
+                max-width: 90%;
+            }
+            
+            .candidate-image {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .team-badge {
+                top: 10px;
+                right: 10px;
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+            
+            /* Timeline Further Optimizations */
+            .timeline-item::after {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .timeline-left, .timeline-right {
+                padding-left: 40px;
+            }
+            
+            /* Countdown */
+            .countdown-item {
+                min-width: 60px;
+            }
+            
+            .countdown-number {
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            /* FAQ */
+            .faq-question {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Social Buttons */
+            .social-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding-top: 90px;
+            }
+            
+            .text-4xl {
+                font-size: 1.5rem;
+            }
+            
+            .text-2xl {
+                font-size: 1.1rem;
+            }
+            
+            .py-20 {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            /* Team Cards Even More Compact */
+            .team-card {
+                height: 450px;
+                margin-bottom: 25px;
+            }
+            
+            .team-card-front, .team-card-back {
+                padding: 1rem;
+            }
+            
+            .candidate-image {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 15px;
+            }
+            
+            /* Timeline Final Adjustments */
+            .timeline-container::before {
+                left: 15px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+                width: 14px;
+                height: 14px;
+            }
+            
+            .timeline-left, .timeline-right {
+                padding-left: 35px;
+            }
+            
+            /* Manifesto */
+            .manifesto-item {
+                padding: 0.75rem;
+            }
+            
+            /* Scrolling Text */
+            .scroll-text-container {
+                height: 40px;
+                font-size: 0.8rem;
+            }
+            
+            /* FAQ */
+            .faq-question {
+                font-size: 0.8rem;
+            }
+            
+            /* Vote Button */
+            .vote-button {
+                padding: 0.5rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -1051,17 +1327,17 @@
     <div class="progress-bar" id="progressBar"></div>
     
     <!-- Navigation -->
-    <nav class="bg-white shadow-md py-4 px-6 fixed top-0 w-full z-50">
+    <nav class="bg-white shadow-md py-4 px-4 md:px-6 fixed top-0 w-full z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
-                <div class="h-12 w-12 rounded-full bg-accent flex items-center justify-center">
+                <div class="h-10 md:h-12 w-10 md:w-12 rounded-full bg-accent flex items-center justify-center">
                     <!-- <span class="text-white font-bold text-lg">VoS</span> -->
-                    <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%;">
+                    <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <span class="ml-3 text-primary font-bold text-xl">Voice of Scholars</span>
+                <span class="ml-2 md:ml-3 text-primary font-bold text-base md:text-xl">Voice of Scholars</span>
             </div>
             
-            <div class="hidden md:flex space-x-6">
+            <div class="hidden md:flex space-x-4 lg:space-x-6">
                 <a href="#vision" class="nav-pill text-gray-700 hover:text-primary">Vision</a>
                 <a href="#why-vote" class="nav-pill text-gray-700 hover:text-primary">Why Vote</a>
                 <a href="#manifesto" class="nav-pill text-gray-700 hover:text-primary">Manifesto</a>
@@ -1131,7 +1407,7 @@
     </div>
     
     <!-- Hero Section -->
-    <section class="hero-section py-20 px-4 relative overflow-hidden">
+    <section class="hero-section py-12 md:py-20 px-4 relative overflow-hidden">
         <div class="hero-pattern"></div>
         <div class="animated-bg">
             <div class="animated-bg-shape shape1"></div>
@@ -1140,20 +1416,20 @@
         </div>
         
         <div class="container mx-auto relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="text-white slide-up hero-content">
-                    <h1 class="text-4xl md:text-6xl font-black montserrat mb-4 leading-tight">
+                    <h1 class="text-3xl md:text-4xl lg:text-6xl font-black montserrat mb-4 leading-tight">
                         From <span class="text-gold">Voices</span> to <span class="text-gold">Victory</span>
                     </h1>
-                    <h2 class="text-2xl md:text-3xl font-bold mb-6">
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6">
                         From Promises to Progress
                     </h2>
-                    <p class="text-lg mb-8 text-gray-200">
+                    <p class="text-base md:text-lg mb-6 md:mb-8 text-gray-200">
                         Join the Voice of Scholars movement as we unite to transform USIU-Africa's Mastercard Foundation Scholars Program. Your voice matters. It's time to make real change happen.
                     </p>
                     
                     <!-- Countdown Timer -->
-                    <div class="bg-white bg-opacity-10 p-4 rounded-lg mb-8">
+                    <div class="bg-white bg-opacity-10 p-3 md:p-4 rounded-lg mb-6 md:mb-8">
                         <h3 class="text-white text-center mb-2 font-bold">Election Day Countdown</h3>
                         <div class="countdown-container">
                             <div class="countdown-item">
@@ -1179,7 +1455,7 @@
                         <button class="vote-button pulse">
                             Campaign With Us
                         </button>
-                        <a href="#manifesto" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary transition px-6 py-3 rounded-full font-bold">
+                        <a href="#manifesto" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary transition px-4 md:px-6 py-2 md:py-3 rounded-full font-bold">
                             Our Manifesto
                         </a>
                     </div>
@@ -1190,42 +1466,42 @@
                     <div class="hero-slide active" style="background-color: rgba(0,0,0,0.3);">
                         <img src="images/TheTeamEdited.jpg" alt="VoS Team" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
                         <div class="hero-slide-content">
-                            <h2 class="text-2xl font-bold mb-2">Voice of Scholars Team</h2>
+                            <h2 class="text-xl md:text-2xl font-bold mb-2">Voice of Scholars Team</h2>
                             <p>United for change, committed to progress!</p>
                         </div>
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
                         <img src="images/PrezooEdited.jpg" alt="Asafu Mamlaka" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
                         <div class="hero-slide-content">
-                            <h2 class="text-2xl font-bold mb-2">Asafu Mamlaka</h2>
+                            <h2 class="text-xl md:text-2xl font-bold mb-2">Asafu Mamlaka</h2>
                             <p>Candidate for Scholar President</p>
                         </div>
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
                         <img src="images/Prezzo&viceedited.jpg" alt="Rencia Seda" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
                         <div class="hero-slide-content">
-                            <h2 class="text-2xl font-bold mb-2">Rencia Seda</h2>
+                            <h2 class="text-xl md:text-2xl font-bold mb-2">Rencia Seda</h2>
                             <p>Candidate for Vice President</p>
                         </div>
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
                         <img src="images/Renciaedited.jpg" alt="Jaili Abdalla" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
                         <div class="hero-slide-content">
-                            <h2 class="text-2xl font-bold mb-2">Jaili Abdalla</h2>
+                            <h2 class="text-xl md:text-2xl font-bold mb-2">Jaili Abdalla</h2>
                             <p>Candidate for Scholar Support</p>
                         </div>
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
                         <img src="images/FinacneEdited.jpg" alt="Jaili Abdalla" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
                         <div class="hero-slide-content">
-                            <h2 class="text-2xl font-bold mb-2">Iranzi Innocent</h2>
+                            <h2 class="text-xl md:text-2xl font-bold mb-2">Iranzi Innocent</h2>
                             <p>Safe accounting</p>
                         </div>
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
                         <img src="images/Prezzo&viceedited.jpg" alt="Helefti Gudayu" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
                         <div class="hero-slide-content">
-                            <h2 class="text-2xl font-bold mb-2">Helefti Gudayu</h2>
+                            <h2 class="text-xl md:text-2xl font-bold mb-2">Helefti Gudayu</h2>
                             <p>Candidate for Community Engagement</p>
                         </div>
                     </div>
@@ -1233,9 +1509,9 @@
             </div>
             
             <!-- Campaign Mottos -->
-            <div class="mt-16 bg-white bg-opacity-10 p-6 rounded-lg">
-                <h3 class="text-white font-bold text-xl mb-4 text-center">Campaign Mottos</h3>
-                <div class="grid md:grid-cols-4 gap-4">
+            <div class="mt-12 md:mt-16 bg-white bg-opacity-10 p-4 md:p-6 rounded-lg">
+                <h3 class="text-white font-bold text-lg md:text-xl mb-4 text-center">Campaign Mottos</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="bg-white bg-opacity-20 p-4 rounded hover:bg-white hover:bg-opacity-30 transition">
                         <p class="text-white font-medium text-center">"From Voices to Victory: From Promises to Progress"</p>
                     </div>
@@ -1256,16 +1532,16 @@
     </section>
     
     <!-- Vision Section -->
-    <section id="vision" class="py-20 px-4 bg-white relative">
+    <section id="vision" class="py-12 md:py-20 px-4 bg-white relative">
         <div class="parallax-bg" data-parallax-speed="0.2"></div>
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-primary montserrat">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
                 Our <span class="text-gold">Vision</span> & <span class="text-gold">Mission</span>
             </h2>
             
-            <div class="grid md:grid-cols-2 gap-16">
-                <div class="bg-gray-50 p-8 rounded-lg shadow-md border-t-4 border-primary transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-right">
-                    <h3 class="text-2xl font-bold mb-4 text-primary">Vision Statement</h3>
+            <div class="grid md:grid-cols-2 gap-8 md:gap-16">
+                <div class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border-t-4 border-primary transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-right">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">Vision Statement</h3>
                     <p class="text-gray-700 leading-relaxed">
                         We, the Voice of Scholars (VoS), stand as a resolute extension of the 2024 People's Voice 
                         Party, a collective forged by scholars of the Mastercard Foundation Scholars Program at 
@@ -1284,8 +1560,8 @@
                 </div>
                 
                 <div class="flex flex-col gap-8">
-                    <div class="bg-gray-50 p-8 rounded-lg shadow-md border-t-4 border-gold transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-left" data-aos-delay="100">
-                        <h3 class="text-2xl font-bold mb-4 text-primary">Mission 1</h3>
+                    <div class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border-t-4 border-gold transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-left" data-aos-delay="100">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">Mission 1</h3>
                         <p class="text-gray-700 leading-relaxed">
                             To elevate the voice of scholars and tangibly bring to light everyday-issues that are often 
                             neglected to ensure that every scholar feels included through the creation of platforms, 
@@ -1293,8 +1569,8 @@
                         </p>
                     </div>
                     
-                    <div class="bg-gray-50 p-8 rounded-lg shadow-md border-t-4 border-gold transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-left" data-aos-delay="200">
-                        <h3 class="text-2xl font-bold mb-4 text-primary">Mission 2</h3>
+                    <div class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border-t-4 border-gold transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-left" data-aos-delay="200">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">Mission 2</h3>
                         <p class="text-gray-700 leading-relaxed">
                             The Voice of Scholars (VoS) is passionately dedicated to amplifying the diverse voices of 
                             scholars, transforming their concerns, aspirations, and everyday challenges into 
@@ -1311,69 +1587,69 @@
     </section>
     
     <!-- Why Vote For Us Section -->
-    <section id="why-vote" class="py-20 px-4 bg-gray-50 relative">
+    <section id="why-vote" class="py-12 md:py-20 px-4 bg-gray-50 relative">
         <div class="parallax-bg" data-parallax-speed="0.1"></div>
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-primary montserrat">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
                 Why <span class="text-gold">Vote</span> For Us
             </h2>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="why-vote-item bg-white p-8 rounded-lg shadow-md text-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="why-vote-item bg-white p-6 md:p-8 rounded-lg shadow-md text-center">
                     <div class="why-vote-icon">
-                        <i class="fas fa-bullhorn"></i>
+                        <i class="fas fa-bullhorn text-primary text-3xl mb-3"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-4">Your Voice Matters</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Your Voice Matters</h3>
                     <p class="text-gray-700">
                         We don't just listen to your concerns - we amplify them, ensuring they reach those with the power to make change happen.
                     </p>
                 </div>
                 
-                <div class="why-vote-item bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="why-vote-item bg-white p-6 md:p-8 rounded-lg shadow-md text-center">
                     <div class="why-vote-icon">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-users text-primary text-3xl mb-3"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-4">Unity in Diversity</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Unity in Diversity</h3>
                     <p class="text-gray-700">
                         Our team represents the rich diversity of scholars, ensuring all perspectives and needs are considered in our initiatives.
                     </p>
                 </div>
                 
-                <div class="why-vote-item bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="why-vote-item bg-white p-6 md:p-8 rounded-lg shadow-md text-center">
                     <div class="why-vote-icon">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-bolt text-primary text-3xl mb-3"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-4">Swift Action</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Swift Action</h3>
                     <p class="text-gray-700">
                         Through our Rapid Response Squad, we promise quick solutions to pressing issues affecting scholars' well-being and success.
                     </p>
                 </div>
                 
-                <div class="why-vote-item bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="why-vote-item bg-white p-6 md:p-8 rounded-lg shadow-md text-center">
                     <div class="why-vote-icon">
-                        <i class="fas fa-lightbulb"></i>
+                        <i class="fas fa-lightbulb text-primary text-3xl mb-3"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-4">Innovation</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Innovation</h3>
                     <p class="text-gray-700">
                         We bring fresh, creative approaches to longstanding challenges, thinking outside the box for effective solutions.
                     </p>
                 </div>
                 
-                <div class="why-vote-item bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="why-vote-item bg-white p-6 md:p-8 rounded-lg shadow-md text-center">
                     <div class="why-vote-icon">
-                        <i class="fas fa-handshake"></i>
+                        <i class="fas fa-handshake text-primary text-3xl mb-3"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-4">Accountability</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Accountability</h3>
                     <p class="text-gray-700">
                         We hold ourselves to the highest standards, with transparent processes and regular updates on our progress.
                     </p>
                 </div>
                 
-                <div class="why-vote-item bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="why-vote-item bg-white p-6 md:p-8 rounded-lg shadow-md text-center">
                     <div class="why-vote-icon">
-                        <i class="fas fa-trophy"></i>
+                        <i class="fas fa-trophy text-primary text-3xl mb-3"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-primary mb-4">Excellence</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-primary mb-3 md:mb-4">Excellence</h3>
                     <p class="text-gray-700">
                         We believe in celebrating and fostering academic and extracurricular excellence within the scholar community.
                     </p>
@@ -1383,13 +1659,13 @@
     </section>
     
     <!-- Stats Section -->
-    <section class="py-16 px-4 bg-white">
+    <section class="py-12 md:py-16 px-4 bg-white">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-primary montserrat">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
                 The <span class="text-gold">Impact</span> We'll Make
             </h2>
             
-            <div class="grid md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                 <div class="stat-item">
                     <div class="stat-counter" data-count="100">50</div>
                     <p class="text-gray-600 font-medium">% Commitment</p>
@@ -1426,20 +1702,20 @@
     </section>
     
     <!-- Manifesto Section -->
-    <section id="manifesto" class="py-20 px-4 bg-gray-50 relative">
+    <section id="manifesto" class="py-12 md:py-20 px-4 bg-gray-50 relative">
         <div class="parallax-bg" data-parallax-speed="0.15"></div>
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-primary montserrat">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
                 Our <span class="text-gold">Manifesto</span>
             </h2>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="manifesto-item bg-white p-8 rounded-lg shadow-md">
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <div class="manifesto-item bg-white p-6 md:p-8 rounded-lg shadow-md">
                     <div class="flex items-start mb-4">
-                        <div class="bg-primary rounded-full h-10 w-10 flex items-center justify-center mr-4 flex-shrink-0">
+                        <div class="bg-primary rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
                             <span class="text-white font-bold">1</span>
                         </div>
-                        <h3 class="text-xl font-bold text-primary">Advocating for Reasonable Living Conditions</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-primary">Advocating for Reasonable Living Conditions</h3>
                     </div>
                     <p class="text-gray-700 leading-relaxed">
                         Voice of Scholars champions dignified, student-centered living standards for all scholars – 
@@ -1448,19 +1724,19 @@
                         by the 'scholars' handbook,' deserves a conducive environment that supports their 
                         academic journey and well-being.
                     </p>
-                    <div class="mt-4 pl-14">
-                        <p class="text-gray-700 italic">
+                    <div class="mt-3 md:mt-4 pl-10 md:pl-14">
+                        <p class="text-gray-700 italic text-sm md:text-base">
                             "Just because you've not experienced the problem; it doesn't mean that the problem doesn't exist!"
                         </p>
                     </div>
                 </div>
                 
-                <div class="manifesto-item bg-white p-8 rounded-lg shadow-md">
+                <div class="manifesto-item bg-white p-6 md:p-8 rounded-lg shadow-md">
                     <div class="flex items-start mb-4">
-                        <div class="bg-primary rounded-full h-10 w-10 flex items-center justify-center mr-4 flex-shrink-0">
+                        <div class="bg-primary rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
                             <span class="text-white font-bold">2</span>
                         </div>
-                        <h3 class="text-xl font-bold text-primary">Revitalizing Extra-Academic Support Systems</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-primary">Revitalizing Extra-Academic Support Systems</h3>
                     </div>
                     <p class="text-gray-700 leading-relaxed">
                         Extra-academic support is deeply rooted in the Voice of Scholars vibrations. We commit to 
@@ -1475,12 +1751,12 @@
                     </p>
                 </div>
                 
-                <div class="manifesto-item bg-white p-8 rounded-lg shadow-md">
+                <div class="manifesto-item bg-white p-6 md:p-8 rounded-lg shadow-md">
                     <div class="flex items-start mb-4">
-                        <div class="bg-primary rounded-full h-10 w-10 flex items-center justify-center mr-4 flex-shrink-0">
+                        <div class="bg-primary rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
                             <span class="text-white font-bold">3</span>
                         </div>
-                        <h3 class="text-xl font-bold text-primary">Recognizing and Celebrating Scholar Excellence</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-primary">Recognizing and Celebrating Scholar Excellence</h3>
                     </div>
                     <p class="text-gray-700 leading-relaxed">
                         To sustain and enhance scholars' motivation, leadership development, and academic stamina, 
@@ -1496,12 +1772,12 @@
                     </p>
                 </div>
                 
-                <div class="manifesto-item bg-white p-8 rounded-lg shadow-md">
+                <div class="manifesto-item bg-white p-6 md:p-8 rounded-lg shadow-md">
                     <div class="flex items-start mb-4">
-                        <div class="bg-primary rounded-full h-10 w-10 flex items-center justify-center mr-4 flex-shrink-0">
+                        <div class="bg-primary rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
                             <span class="text-white font-bold">4</span>
                         </div>
-                        <h3 class="text-xl font-bold text-primary">Establishing a 'Scholars-First' Rapid Response Squad</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-primary">Establishing a 'Scholars-First' Rapid Response Squad</h3>
                     </div>
                     <p class="text-gray-700 leading-relaxed">
                         Every one in three scholars will report stories of the program team dragging their 
@@ -1516,12 +1792,12 @@
                     </p>
                 </div>
                 
-                <div class="manifesto-item bg-white p-8 rounded-lg shadow-md md:col-span-2">
+                <div class="manifesto-item bg-white p-6 md:p-8 rounded-lg shadow-md md:col-span-2">
                     <div class="flex items-start mb-4">
-                        <div class="bg-primary rounded-full h-10 w-10 flex items-center justify-center mr-4 flex-shrink-0">
+                        <div class="bg-primary rounded-full h-8 w-8 md:h-10 md:w-10 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
                             <span class="text-white font-bold">5</span>
                         </div>
-                        <h3 class="text-xl font-bold text-primary">Fostering Scholar Solidarity – On Campus and Beyond</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-primary">Fostering Scholar Solidarity – On Campus and Beyond</h3>
                     </div>
                     <p class="text-gray-700 leading-relaxed">
                         As Voice of Scholars (VoS), we are all committed to bringing scholars together like one 
@@ -1542,259 +1818,338 @@
             </div>
         </div>
     </section>
-    
-    <!-- Team Section -->
-    <section id="team" class="py-20 px-4 bg-white relative">
-        <div class="parallax-bg" data-parallax-speed="0.2"></div>
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-primary montserrat">
-                Meet Our <span class="text-gold">Team</span>
-            </h2>
+   <!-- Team Section -->
+<section id="team" class="py-12 md:py-20 px-4 bg-white relative">
+    <div class="parallax-bg" data-parallax-speed="0.2"></div>
+    <div class="container mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
+            Meet Our <span class="text-gold">Team</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+            <!-- President -->
+            <div class="team-card relative">
+                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Presidential Candidate</div>
+                <div class="team-card-inner">
+                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
+                        <img src="images/PrezzoHead.jpg" alt="Asafu Mamlaka" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+
+
+
+                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Asafu Mamlaka Etandala</h3>
+                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholars' Council President</p>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                            I'm your Voice of Scholars (VoS) candidate for President, here to lead with purpose and action. 
+                            Inspired by our motto, "From Voices to Victory: From Promises to Progress."
+                        </p>
+                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
+                    </div>
+                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
+                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Asafu Mamlaka Etandala</h3>
+                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                            I'll represent you at the Mastercard Foundation Scholar Council, ensuring your concerns—like reliable Wi-Fi, 
+                            safe housing, and timely stipend disbursements—reach the administration. I'll coordinate the council to deliver 
+                            on our manifesto, from advocating for reasonable living conditions to establishing a Rapid Response Squad for urgent issues.
+                        </p>
+                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                            "Leadership is not about being in charge. It's about taking care of those in your charge." – Simon Sinek
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- President -->
-                <div class="team-card">
-                    <div class="team-badge">Presidential Candidate</div>
-                    <div class="team-card-inner">
-                        <div class="team-card-front">
-                            <img src="images/PrezzoHead.jpg" alt="Asafu Mamlaka" class="candidate-image">
-                            <h3 class="text-xl font-bold text-primary text-center">Asafu Mamlaka Etandala</h3>
-                            <p class="text-primary font-semibold text-center mb-4">Scholars' Council President</p>
-                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                                I'm your Voice of Scholars (VoS) candidate for President, here to lead with purpose and action. 
-                                Inspired by our motto, "From Voices to Victory: From Promises to Progress."
-                            </p>
-                            <p class="text-center text-gray-500 text-sm">(Flip card for more)</p>
-                        </div>
-                        <div class="team-card-back">
-                            <h3 class="text-xl font-bold text-white text-center mb-4">Asafu Mamlaka Etandala</h3>
-                            <p class="text-white text-sm leading-relaxed mb-6">
-                                I'll represent you at the Mastercard Foundation Scholar Council, ensuring your concerns—like reliable Wi-Fi, 
-                                safe housing, and timely stipend disbursements—reach the administration. I'll coordinate the council to deliver 
-                                on our manifesto, from advocating for reasonable living conditions to establishing a Rapid Response Squad for urgent issues.
-                            </p>
-                            <div class="quote text-sm bg-white bg-opacity-10 text-white">
-                                "Leadership is not about being in charge. It's about taking care of those in your charge." – Simon Sinek
-                            </div>
+            <!-- Vice President -->
+            <div class="team-card relative">
+                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Vice Presidential Candidate</div>
+                <div class="team-card-inner">
+                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
+                        <img src="images/RenciaHead.jpg" alt="Rencia Seda" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Rencia Seda</h3>
+                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholars' Council Vice President</p>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                            I'm running for Vice President to support every scholar on campus. Under VoS's mission to amplify your voice.
+                        </p>
+                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
+                    </div>
+                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
+                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Rencia Seda</h3>
+                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                            I'll assist Asafu in tackling everyday challenges while coordinating key activities like Entrepreneurship and 
+                            Internship preparation with the Scholars Program Transition department. I'll also work with Baobab Ambassadors 
+                            to ensure all scholars are registered on the platform, fostering opportunities for growth.
+                        </p>
+                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                            "The best way to find yourself is to lose yourself in the service of others." – Mahatma Gandhi
                         </div>
                     </div>
                 </div>
-                
-                <!-- Vice President -->
-                <div class="team-card">
-                    <div class="team-badge">Vice Presidential Candidate</div>
-                    <div class="team-card-inner">
-                        <div class="team-card-front">
-                            <img src="images/RenciaHead.jpg" alt="Rencia Seda" class="candidate-image">
-                            <h3 class="text-xl font-bold text-primary text-center">Rencia Seda</h3>
-                            <p class="text-primary font-semibold text-center mb-4">Scholars' Council Vice President</p>
-                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                                I'm running for Vice President to support every scholar on campus. Under VoS's mission to amplify your voice.
-                            </p>
-                            <p class="text-center text-gray-500 text-sm">(Flip card for more)</p>
-                        </div>
-                        <div class="team-card-back">
-                            <h3 class="text-xl font-bold text-white text-center mb-4">Rencia Seda</h3>
-                            <p class="text-white text-sm leading-relaxed mb-6">
-                                I'll assist Asafu in tackling everyday challenges while coordinating key activities like Entrepreneurship and 
-                                Internship preparation with the Scholars Program Transition department. I'll also work with Baobab Ambassadors 
-                                to ensure all scholars are registered on the platform, fostering opportunities for growth.
-                            </p>
-                            <div class="quote text-sm bg-white bg-opacity-10 text-white">
-                                "The best way to find yourself is to lose yourself in the service of others." – Mahatma Gandhi
-                            </div>
+            </div>
+            
+            <!-- Finance Advisor -->
+            <div class="team-card relative">
+                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Finance Advisor</div>
+                <div class="team-card-inner">
+                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
+                        <img src="images/PrezooEdited.jpg" alt="Brian Omondi" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
+                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Iranzi Innocent</h3>
+                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Finance Advisor</p>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                            I'm your VoS candidate for Finance Advisor, committed to financial empowerment.
+                        </p>
+                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
+                    </div>
+                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
+                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Brian Omondi</h3>
+                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                            As a Business student, I'll advise on budgeting and work with the Program Accountant to ensure stipends 
+                            are disbursed on time—no more delays that disrupt your plans. I'll introduce financial literacy workshops 
+                            to equip you for success, aligning with our mission for equitable support.
+                        </p>
+                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                            "Financial freedom is available to those who learn about it and work for it." – Robert Kiyosaki
                         </div>
                     </div>
                 </div>
-                
-                <!-- Finance Advisor -->
-                <div class="team-card">
-                    <div class="team-badge">Finance Advisor</div>
-                    <div class="team-card-inner">
-                        <div class="team-card-front">
-                            <img src="images/PrezooEdited.jpg" alt="Brian Omondi" class="candidate-image">
-                            <h3 class="text-xl font-bold text-primary text-center">Iranzi Innocent</h3>
-                            <p class="text-primary font-semibold text-center mb-4">Finance Advisor</p>
-                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                                I'm your VoS candidate for Finance Advisor, committed to financial empowerment.
-                            </p>
-                            <p class="text-center text-gray-500 text-sm">(Flip card for more)</p>
-                        </div>
-                        <div class="team-card-back">
-                            <h3 class="text-xl font-bold text-white text-center mb-4">Brian Omondi</h3>
-                            <p class="text-white text-sm leading-relaxed mb-6">
-                                As a Business student, I'll advise on budgeting and work with the Program Accountant to ensure stipends 
-                                are disbursed on time—no more delays that disrupt your plans. I'll introduce financial literacy workshops 
-                                to equip you for success, aligning with our mission for equitable support.
-                            </p>
-                            <div class="quote text-sm bg-white bg-opacity-10 text-white">
-                                "Financial freedom is available to those who learn about it and work for it." – Robert Kiyosaki
-                            </div>
+            </div>
+            
+            <!-- Scholar Support Representative -->
+            <div class="team-card relative">
+                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Scholar Support</div>
+                <div class="team-card-inner">
+                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
+                        <img src="images/JailiHead.jpg" alt="Jaili Abdalla" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
+                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Jaili Abdalla</h3>
+                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholar Support Representative</p>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                            I'm running for Scholar Support Representative to be your advocate and secretary.
+                        </p>
+                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
+                    </div>
+                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
+                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Jaili Abdalla</h3>
+                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                            I'll coordinate with Family Heads to address your welfare needs, ensuring issues like delayed stipends 
+                            or visa renewals are resolved swiftly through our Rapid Response Squad. I'll keep you informed with clear 
+                            communication, working closely with the Scholar Support office to make sure every scholar feels heard and valued.
+                        </p>
+                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                            "We rise by lifting others." – Robert Ingersoll
                         </div>
                     </div>
                 </div>
-                
-                <!-- Scholar Support Representative -->
-                <div class="team-card">
-                    <div class="team-badge">Scholar Support</div>
-                    <div class="team-card-inner">
-                        <div class="team-card-front">
-                            <img src="images/JailiHead.jpg" alt="Jaili Abdalla" class="candidate-image">
-                            <h3 class="text-xl font-bold text-primary text-center">Jaili Abdalla</h3>
-                            <p class="text-primary font-semibold text-center mb-4">Scholar Support Representative</p>
-                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                                I'm running for Scholar Support Representative to be your advocate and secretary.
-                            </p>
-                            <p class="text-center text-gray-500 text-sm">(Flip card for more)</p>
-                        </div>
-                        <div class="team-card-back">
-                            <h3 class="text-xl font-bold text-white text-center mb-4">Jaili Abdalla</h3>
-                            <p class="text-white text-sm leading-relaxed mb-6">
-                                I'll coordinate with Family Heads to address your welfare needs, ensuring issues like delayed stipends 
-                                or visa renewals are resolved swiftly through our Rapid Response Squad. I'll keep you informed with clear 
-                                communication, working closely with the Scholar Support office to make sure every scholar feels heard and valued.
-                            </p>
-                            <div class="quote text-sm bg-white bg-opacity-10 text-white">
-                                "We rise by lifting others." – Robert Ingersoll
-                            </div>
+            </div>
+            
+            <!-- Inclusion Representative -->
+            <div class="team-card relative">
+                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Inclusion Representative</div>
+                <div class="team-card-inner">
+                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
+                        <img src="images/TeamHead.jpg" alt="Ezra" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
+                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Ezra</h3>
+                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">inclusion Representative</p>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                            I'm your VoS candidate for Inclusion Representative, and as a refugee scholar, I understand the challenges of being heard.
+                        </p>
+                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
+                    </div>
+                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
+                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Ezra</h3>
+                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                            I'll represent scholars with disabilities and refugees, advocating for accessible facilities, equitable policies, 
+                            and onboarding support. Drawing from my experience in refugee-led initiatives, I'll ensure your voices shape our 
+                            council's decisions.
+                        </p>
+                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                            "inclusion is not a matter of political correctness. It is the key to growth." – Jesse Jackson
                         </div>
                     </div>
                 </div>
-                
-                <!-- Inclusion Representative -->
-                <div class="team-card">
-                    <div class="team-badge">Inclusion Representative</div>
-                    <div class="team-card-inner">
-                        <div class="team-card-front">
-                            <img src="images/TeamHead.jpg" alt="Ezra" class="candidate-image">
-                            <h3 class="text-xl font-bold text-primary text-center">Ezra</h3>
-                            <p class="text-primary font-semibold text-center mb-4">Inclusion Representative</p>
-                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                                I'm your VoS candidate for Inclusion Representative, and as a refugee scholar, I understand the challenges of being heard.
-                            </p>
-                            <p class="text-center text-gray-500 text-sm">(Flip card for more)</p>
-                        </div>
-                        <div class="team-card-back">
-                            <h3 class="text-xl font-bold text-white text-center mb-4">Ezra</h3>
-                            <p class="text-white text-sm leading-relaxed mb-6">
-                                I'll represent scholars with disabilities and refugees, advocating for accessible facilities, equitable policies, 
-                                and onboarding support. Drawing from my experience in refugee-led initiatives, I'll ensure your voices shape our 
-                                council's decisions.
-                            </p>
-                            <div class="quote text-sm bg-white bg-opacity-10 text-white">
-                                "Inclusion is not a matter of political correctness. It is the key to growth." – Jesse Jackson
-                            </div>
-                        </div>
+            </div>
+            
+            <!-- Community Engagement -->
+            <div class="team-card relative">
+                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Community Engagement</div>
+                <div class="team-card-inner">
+                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
+                        <img src="images/financeHead.jpg" alt="Helefti Gudayu" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
+                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Helefti Gudayu</h3>
+                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Community Engagement</p>
+                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                            As your Community Engagement representative, I'll foster connections between scholars and the broader community.
+                        </p>
+                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
                     </div>
-                </div>
-                
-                <!-- Community Engagement -->
-                <div class="team-card">
-                    <div class="team-badge">Community Engagement</div>
-                    <div class="team-card-inner">
-                        <div class="team-card-front">
-                            <img src="images/financeHead.jpg" alt="Helefti Gudayu" class="candidate-image">
-                            <h3 class="text-xl font-bold text-primary text-center">Helefti Gudayu</h3>
-                            <p class="text-primary font-semibold text-center mb-4">Community Engagement</p>
-                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                                As your Community Engagement representative, I'll foster connections between scholars and the broader community.
-                            </p>
-                            <p class="text-center text-gray-500 text-sm">(Flip card for more)</p>
-                        </div>
-                        <div class="team-card-back">
-                            <h3 class="text-xl font-bold text-white text-center mb-4">Helefti Gudayu</h3>
-                            <p class="text-white text-sm leading-relaxed mb-6">
-                                I'll create opportunities for meaningful collaborations and service projects that benefit both 
-                                scholars and the community at large. Through strategic partnerships and engaging events, we'll build 
-                                bridges that strengthen our collective impact.
-                            </p>
-                            <div class="quote text-sm bg-white bg-opacity-10 text-white">
-                                "Alone we can do so little; together we can do so much." – Helen Keller
-                            </div>
+                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
+                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Helefti Gudayu</h3>
+                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                            I'll create opportunities for meaningful collaborations and service projects that benefit both 
+                            scholars and the community at large. Through strategic partnerships and engaging events, we'll build 
+                            bridges that strengthen our collective impact.
+                        </p>
+                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                            "Alone we can do so little; together we can do so much." – Helen Keller
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    
+    </div>
+</section>
     <!-- Timeline Section -->
-    <section id="timeline" class="py-20 px-4 bg-gray-50 relative">
+    <section id="timeline" class="py-12 md:py-20 px-4 bg-gray-50 relative">
         <div class="parallax-bg" data-parallax-speed="0.15"></div>
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-primary montserrat">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
                 Election <span class="text-gold">Timeline</span>
             </h2>
             
-            <div class="timeline-container max-w-4xl mx-auto py-10">
-                <div class="timeline-item">
-                    <div class="timeline-left ml-auto w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-                            <h3 class="text-lg font-bold text-primary">April 11th–13th</h3>
-                            <p class="text-gray-700">Nominations of candidates (completed)</p>
+            <div class="timeline-container max-w-4xl mx-auto py-6 md:py-10">
+                <!-- Mobile Timeline Layout -->
+                <div class="block md:hidden">
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-primary">
+                                <h3 class="text-base md:text-lg font-bold text-primary">April 11th–13th</h3>
+                                <p class="text-gray-700">Nominations of candidates (completed)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-gold">
+                                <h3 class="text-base md:text-lg font-bold text-primary">April 14th</h3>
+                                <p class="text-gray-700">Compilation of nominees and announcement of candidates</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-primary">
+                                <h3 class="text-base md:text-lg font-bold text-primary">April 16th–26th</h3>
+                                <p class="text-gray-700">Campaign period (active campaigning)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-gold pulse">
+                                <h3 class="text-base md:text-lg font-bold text-primary">April 26th</h3>
+                                <p class="text-gray-700">Debate in the Auditorium</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-primary pulse">
+                                <h3 class="text-base md:text-lg font-bold text-primary">April 27th</h3>
+                                <p class="text-gray-700">Elections and winner declaration at Lillian K. Beam Building</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-gold">
+                                <h3 class="text-base md:text-lg font-bold text-primary">April 28th</h3>
+                                <p class="text-gray-700">Receiving of appeals</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-primary">
+                                <h3 class="text-base md:text-lg font-bold text-primary">April 29th–30th</h3>
+                                <p class="text-gray-700">Report writing/submission to the Office of the Director</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-full">
+                            <div class="bg-white p-4 md:p-6 rounded-lg shadow-md border-l-4 border-gold">
+                                <h3 class="text-base md:text-lg font-bold text-primary">May 2nd</h3>
+                                <p class="text-gray-700">New Scholar Council takes office</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-right w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold">
-                            <h3 class="text-lg font-bold text-primary">April 14th</h3>
-                            <p class="text-gray-700">Compilation of nominees and announcement of candidates</p>
+                <!-- Desktop Timeline Layout -->
+                <div class="hidden md:block">
+                    <div class="timeline-item">
+                        <div class="timeline-left ml-auto w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
+                                <h3 class="text-lg font-bold text-primary">April 11th–13th</h3>
+                                <p class="text-gray-700">Nominations of candidates (completed)</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-left ml-auto w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-                            <h3 class="text-lg font-bold text-primary">April 16th–26th</h3>
-                            <p class="text-gray-700">Campaign period (active campaigning)</p>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold">
+                                <h3 class="text-lg font-bold text-primary">April 14th</h3>
+                                <p class="text-gray-700">Compilation of nominees and announcement of candidates</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-right w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold pulse">
-                            <h3 class="text-lg font-bold text-primary">April 26th</h3>
-                            <p class="text-gray-700">Debate in the Auditorium</p>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-left ml-auto w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
+                                <h3 class="text-lg font-bold text-primary">April 16th–26th</h3>
+                                <p class="text-gray-700">Campaign period (active campaigning)</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-left ml-auto w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary pulse">
-                            <h3 class="text-lg font-bold text-primary">April 27th</h3>
-                            <p class="text-gray-700">Elections and winner declaration at Lillian K. Beam Building</p>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold pulse">
+                                <h3 class="text-lg font-bold text-primary">April 26th</h3>
+                                <p class="text-gray-700">Debate in the Auditorium</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-right w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold">
-                            <h3 class="text-lg font-bold text-primary">April 28th</h3>
-                            <p class="text-gray-700">Receiving of appeals</p>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-left ml-auto w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary pulse">
+                                <h3 class="text-lg font-bold text-primary">April 27th</h3>
+                                <p class="text-gray-700">Elections and winner declaration at Lillian K. Beam Building</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-left ml-auto w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
-                            <h3 class="text-lg font-bold text-primary">April 29th–30th</h3>
-                            <p class="text-gray-700">Report writing/submission to the Office of the Director</p>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold">
+                                <h3 class="text-lg font-bold text-primary">April 28th</h3>
+                                <p class="text-gray-700">Receiving of appeals</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-right w-1/2">
-                        <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold">
-                            <h3 class="text-lg font-bold text-primary">May 2nd</h3>
-                            <p class="text-gray-700">New Scholar Council takes office</p>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-left ml-auto w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-primary">
+                                <h3 class="text-lg font-bold text-primary">April 29th–30th</h3>
+                                <p class="text-gray-700">Report writing/submission to the Office of the Director</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-right w-1/2">
+                            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-gold">
+                                <h3 class="text-lg font-bold text-primary">May 2nd</h3>
+                                <p class="text-gray-700">New Scholar Council takes office</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1803,10 +2158,10 @@
     </section>
     
     <!-- FAQ Section -->
-    <section id="faq" class="py-20 px-4 bg-white relative">
+    <section id="faq" class="py-12 md:py-20 px-4 bg-white relative">
         <div class="parallax-bg" data-parallax-speed="0.1"></div>
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-primary montserrat">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
                 Frequently Asked <span class="text-gold">Questions</span>
             </h2>
             
@@ -1875,46 +2230,46 @@
     </section>
     
     <!-- Call to Action -->
-    <section class="py-20 px-4 bg-gradient-to-r from-secondary to-secondary-dark text-white relative" style="background-color: #328f5c !important">
+    <section class="py-12 md:py-20 px-4 bg-gradient-to-r from-secondary to-secondary-dark text-white relative" style="background-color: #328f5c !important">
         <div class="orange-wave"></div>
         <div class="container mx-auto relative z-10">
             <div class="text-center max-w-3xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 montserrat">Ready to Make Your Voice Heard?</h2>
-                <p class="text-lg mb-10">Join us in transforming USIU-Africa's Mastercard Foundation Scholars Program. Together, we'll turn promises into progress.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 md:mb-6 montserrat">Ready to Make Your Voice Heard?</h2>
+                <p class="text-base md:text-lg mb-8 md:mb-10">Join us in transforming USIU-Africa's Mastercard Foundation Scholars Program. Together, we'll turn promises into progress.</p>
                 
-                <div class="flex flex-wrap gap-6 justify-center">
+                <div class="flex flex-wrap gap-4 md:gap-6 justify-center">
                     <button class="vote-button pulse flex items-center">
                         <i class="fas fa-vote-yea mr-2"></i>
                         Vote on April 27th
                     </button>
-                    <a href="#team" class="bg-white text-primary hover:bg-gold hover:text-dark transition px-6 py-3 rounded-full font-bold flex items-center">
+                    <a href="#team" class="bg-white text-primary hover:bg-gold hover:text-dark transition px-4 md:px-6 py-2 md:py-3 rounded-full font-bold flex items-center">
                         <i class="fas fa-users mr-2"></i>
                         Meet Our Team
                     </a>
                 </div>
                 
-                <div class="mt-16 grid md:grid-cols-4 gap-8">
-                    <div class="bg-white bg-opacity-10 p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-bullhorn text-4xl mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Spread the Word</h3>
+                <div class="mt-10 md:mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
+                        <i class="fas fa-bullhorn text-3xl md:text-4xl mb-3 md:mb-4"></i>
+                        <h3 class="text-lg md:text-xl font-bold mb-2">Spread the Word</h3>
                         <p>Share our campaign with your fellow scholars</p>
                     </div>
                     
-                    <div class="bg-white bg-opacity-10 p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-comments text-4xl mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Join the Conversation</h3>
+                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
+                        <i class="fas fa-comments text-3xl md:text-4xl mb-3 md:mb-4"></i>
+                        <h3 class="text-lg md:text-xl font-bold mb-2">Join the Conversation</h3>
                         <p>Attend our campaign events and debates</p>
                     </div>
                     
-                    <div class="bg-white bg-opacity-10 p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-lightbulb text-4xl mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Share Your Ideas</h3>
+                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
+                        <i class="fas fa-lightbulb text-3xl md:text-4xl mb-3 md:mb-4"></i>
+                        <h3 class="text-lg md:text-xl font-bold mb-2">Share Your Ideas</h3>
                         <p>We're always open to suggestions and feedback</p>
                     </div>
                     
-                    <div class="bg-white bg-opacity-10 p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-hands-helping text-4xl mb-4"></i>
-                        <h3 class="text-xl font-bold mb-2">Volunteer</h3>
+                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
+                        <i class="fas fa-hands-helping text-3xl md:text-4xl mb-3 md:mb-4"></i>
+                        <h3 class="text-lg md:text-xl font-bold mb-2">Volunteer</h3>
                         <p>Help us in our campaign activities</p>
                     </div>
                 </div>
@@ -1922,21 +2277,21 @@
         </div>
     </section>
     
-    <footer class="bg-gray-900 text-white py-10 px-4">
+    <footer class="bg-gray-900 text-white py-8 md:py-10 px-4">
         <div class="container mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-10">
                 <div class="mb-6 md:mb-0">
-                    <div class="flex items-center">
-                        <div class="h-12 w-12 rounded-full bg-accent flex items-center justify-center">
-                            <img src="images/Logoedited.jpg" alt="Logo"> <!-- Logo image -->
+                    <!-- <div class="flex items-center">
+                        <div class="h-10 md:h-12 w-10 md:w-12 rounded-full bg-accent flex items-center justify-center">
+                            <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <span class="ml-3 text-white font-bold text-xl">Voice of Scholars</span>
-                    </div>
-                    <p class="text-gray-400 mt-2">Mastercard Foundation Scholars Program, USIU-Africa</p>
+                        <span class="ml-3 text-white font-bold text-lg md:text-xl">Voice of Scholars</span>
+                    </div> -->
+                    <!-- <p class="text-gray-400 mt-2">Mastercard Foundation Scholars Program, USIU-Africa</p> -->
                 </div>
                 
-                <div class="flex flex-col md:flex-row gap-8">
-                    <div>
+                <div class="flex flex-col sm:flex-row gap-6 md:gap-8">
+                    <!-- <div>
                         <h4 class="text-accent font-bold mb-3">Quick Links</h4>
                         <ul class="space-y-2">
                             <li><a href="#vision" class="text-gray-400 hover:text-white transition">Vision</a></li>
@@ -1953,10 +2308,16 @@
                             <li class="text-gray-400"><i class="fas fa-phone mr-2"></i> +254 700 000 000</li>
                             <li class="text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i> USIU-Africa, Nairobi</li>
                         </ul>
+                    </div> -->
+                    <div class="flex items-center">
+                        <!-- <div class="h-10 md:h-12 w-10 md:w-12 rounded-full bg-accent flex items-center justify-center">
+                            <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                        </div> -->
+                        <span class="ml-3 text-white font-bold text-lg md:text-xl">Voice of Scholars</span>
                     </div>
                     
                     <div>
-                        <h4 class="text-accent font-bold mb-3">Follow Us</h4>
+                        <!-- <h4 class="text-accent font-bold mb-3">Follow Us</h4> -->
                         <div class="flex space-x-4">
                             <a href="#" class="social-btn social-twitter"><i class="fab fa-twitter"></i></a>
                             <a href="#" class="social-btn social-instagram"><i class="fab fa-instagram"></i></a>
@@ -1967,9 +2328,9 @@
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                <p>© 2025 Voice of Scholars. All Rights Reserved.</p>
-                <p class="mt-2">Design by VoS Creative Team</p>
+            <div class="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-500 text-sm">
+                <p>© 2025 Voice of Scholars.</p>
+                <p class="mt-2">By VoS Creative Team : IRANZI INNOCENT</p>
             </div>
         </div>
     </footer>
@@ -2179,6 +2540,39 @@
         
         // Run initial scroll effects
         window.dispatchEvent(new Event('scroll'));
+        
+        // Add mobile-specific code for ensuring team card visibility
+        function checkTeamCards() {
+            // Force display of team cards on mobile
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.team-card').forEach(card => {
+                    card.style.display = 'block';
+                    // Ensure all content is visible
+                    card.style.overflow = 'visible';
+                });
+            }
+        }
+        
+        // Run on page load and resize
+        window.addEventListener('load', checkTeamCards);
+        window.addEventListener('resize', checkTeamCards);
+        
+        // For touch devices, make card flip on tap instead of hover
+        if ('ontouchstart' in window || navigator.maxTouchPoints) {
+            document.querySelectorAll('.team-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Only flip if we clicked the card itself, not a link inside it
+                    if (e.target.tagName !== 'A') {
+                        const inner = this.querySelector('.team-card-inner');
+                        if (inner.style.transform === 'rotateY(180deg)') {
+                            inner.style.transform = 'rotateY(0deg)';
+                        } else {
+                            inner.style.transform = 'rotateY(180deg)';
+                        }
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>
