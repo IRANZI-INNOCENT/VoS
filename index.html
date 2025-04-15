@@ -145,8 +145,6 @@
             font-size: 16px;
         }
         
-        
-        
         /* Manifesto Items */
         .manifesto-item {
             transition: all 0.5s ease;
@@ -162,140 +160,236 @@
             opacity: 1;
             border-left: 4px solid var(--primary);
         }
+        
         /* Team Section */
-#team {
+        #team {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Team Card Styles */
+        .team-card {
+            position: relative;
+            padding-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            height: auto;
+        }
+
+        .team-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--gold);
+            color: #000;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-radius: 0.25rem;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .team-card-inner {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .team-card:hover .team-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .team-card-front, .team-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .team-card-back {
+            transform: rotateY(180deg);
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .candidate-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+        }
+
+       /* Designer Carousel */
+.designer-carousel {
     position: relative;
+    justify-content: center;
+    padding: 20px 0;
+    margin: 30px 0;
     overflow: hidden;
+    display: flex; /* added to enable flex behavior */
 }
 
-/* Team Card Styles */
-.team-card {
-    position: relative;
-    padding-top: 1.5rem; /* Space for badge to sit above content */
-    margin-bottom: 1.5rem;
-}
-
-.team-badge {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #FFD700; /* Gold background */
-    color: #000;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem; /* 12px */
-    font-weight: bold;
-    border-radius: 0.25rem;
-    white-space: nowrap;
-    z-index: 10; /* Ensures badge is above other elements */
-}
-
-.team-card-inner {
-    position: relative;
+.designer-carousel-inner {
+    display: flex;
+    justify-content: center; /* centers items if there's extra space */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+    margin: 0 auto; /* center the container itself */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 20px;
     width: 100%;
-    height: 400px; /* Fixed height for flip effect on larger screens */
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
 }
 
-.team-card:hover .team-card-inner {
-    transform: rotateY(180deg); /* Flip effect on hover */
+.designer-carousel-inner::-webkit-scrollbar {
+    display: none;
 }
 
-.team-card-front, .team-card-back {
-    position: absolute;
+.designer-card {
+    flex: 0 0 auto;
+    width: 220px;
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    scroll-snap-align: start;
+    transition: all 0.3s ease;
+}
+
+.designer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.designer-img {
     width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    overflow: hidden;
-}
-
-.team-card-back {
-    transform: rotateY(180deg);
-    background-color: #2c3e50; /* Dark background for contrast */
-}
-
-.candidate-image {
-    width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
-    margin-bottom: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 6px;
+    margin-bottom: 10px;
 }
 
-/* Text Styling */
-.team-card-front h3, .team-card-back h3 {
-    margin-bottom: 0.75rem;
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.8;
+    transition: all 0.3s ease;
 }
 
-.team-card-front p, .team-card-back p {
-    margin-bottom: 1rem;
+.carousel-control:hover {
+    opacity: 1;
+    background: var(--primary-dark);
 }
 
-.team-card-back .quote {
-    padding: 0.75rem;
-    border-radius: 0.25rem;
+.carousel-prev {
+    left: 10px;
 }
 
-/* Responsive Adjustments for Small Screens */
-@media (max-width: 640px) {
-    .team-card-inner {
-        height: auto;
-        transform: none !important; /* Disable flip effect */
-    }
-
-    .team-card-front, .team-card-back {
-        position: static;
-        height: auto;
-        transform: none;
-        box-shadow: none; /* Remove shadow for cleaner stacking */
-    }
-
-    .team-card-back {
-        margin-top: 1rem;
-        padding: 1rem;
-        background-color: #f9f9f9; /* Light background for readability */
-    }
-
-    .candidate-image {
-        height: 150px; /* Smaller image height for compact layout */
-    }
-
-    .team-card {
-        margin-bottom: 2rem;
-    }
-
-    .team-card-front h3, .team-card-back h3 {
-        font-size: 1.25rem; /* 20px */
-    }
-
-    .team-card-front p, .team-card-back p {
-        font-size: 0.875rem; /* 14px */
-    }
-
-    .team-badge {
-        font-size: 0.65rem; /* 10.4px */
-        padding: 0.2rem 0.4rem;
-    }
-
-    .team-grid {
-        gap: 1rem; /* Reduced gap for tighter layout */
-    }
+.carousel-next {
+    right: 10px;
 }
 
-/* Very Small Screens (below 480px) */
-@media (max-width: 480px) {
-    .team-grid {
-        grid-template-columns: repeat(1, minmax(0, 1fr)); /* One column for tiny screens */
-    }
+        /* Improved FAQ Section */
+        .faq-section {
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
 
-    .candidate-image {
-        height: 120px; /* Even smaller image for very small screens */
-    }
-}
+        .faq-item {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .faq-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .faq-question {
+            padding: 1rem 1.5rem;
+            background: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            background: white;
+            transition: all 0.5s ease;
+        }
+        
+        .faq-answer-content {
+            padding: 1rem 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+        
+        .faq-item.active .faq-question {
+            background: #f8f9fa;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .manifesto-item {
+            transition: all 0.5s ease;
+            border-left: 4px solid transparent;
+            transform: translateY(50px);
+            opacity: 0;
+            background: var(--white);
+            border-radius: 8px;
+        }
+        
+        .manifesto-item.show {
+            transform: translateY(0);
+            opacity: 1;
+            border-left: 4px solid var(--primary);
+        }
+        
         .manifesto-item:hover {
             background-color: var(--primary-transparent);
             transform: translateY(-5px);
@@ -400,7 +494,7 @@
             width: 100%;
         }
         
-        /* Animations */
+        /* Enhanced Animations */
         .floating {
             animation: floating 3s ease-in-out infinite;
         }
@@ -456,6 +550,43 @@
             }
             to {
                 transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* New animations */
+        .fade-in-right {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .bounce-in {
+            animation: bounceIn 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            40% {
+                transform: scale(1.1);
+            }
+            60% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
                 opacity: 1;
             }
         }
@@ -554,7 +685,7 @@
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
-            margin-bottom: 15px; /* Added margin for better spacing on mobile */
+            margin-bottom: 15px;
         }
         
         .stat-item.show {
@@ -617,51 +748,6 @@
             height: 100px;
             background: url('https://cdn.jsdelivr.net/gh/sdras/cssgridgenerator@master/wave.svg') repeat-x;
             background-size: 1000px 100px;
-        }
-        
-        /* FAQ Accordion */
-        .faq-item {
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .faq-question {
-            padding: 1rem 1.5rem;
-            background: white;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .faq-question:hover {
-            background: var(--primary-light);
-            color: white;
-        }
-        
-        .faq-answer {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            background: white;
-            transition: all 0.5s ease;
-        }
-        
-        .faq-answer-content {
-            padding: 1rem 0;
-        }
-        
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-        }
-        
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
         }
         
         /* Social Media Buttons */
@@ -822,7 +908,7 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 0.05s ease;
+            transition: opacity 0.5s ease;
             background-size: cover;
             background-position: center;
             display: flex;
@@ -1112,14 +1198,29 @@
             /* Team Cards Fixes */
             .team-card {
                 max-width: 320px;
-                height: 500px;
+                height: auto !important;
                 margin: 0 auto 30px;
                 display: block !important;
+            }
+            
+            .team-card-inner {
+                height: auto !important;
+                transform-style: flat !important;
+            }
+            
+            .team-card-front, .team-card-back {
+                position: relative !important;
+                height: auto !important;
+                transform: none !important;
+                backface-visibility: visible !important;
+                margin-bottom: 15px;
             }
             
             .candidate-image {
                 width: 150px;
                 height: 150px;
+                display: block;
+                margin: 0 auto 1rem;
             }
             
             /* Timeline Fixes */
@@ -1168,6 +1269,15 @@
             .stat-counter {
                 font-size: 2.5rem;
             }
+            
+            /* Designer Carousel */
+            .designer-card {
+                width: 180px;
+            }
+            
+            .designer-img {
+                height: 150px;
+            }
         }
         
         @media (max-width: 640px) {
@@ -1200,7 +1310,7 @@
             
             /* Team Cards Further Optimizations */
             .team-card {
-                height: 480px;
+                height: auto;
                 max-width: 90%;
             }
             
@@ -1248,6 +1358,20 @@
                 height: 40px;
                 font-size: 1rem;
             }
+            
+            /* Designer Carousel */
+            .designer-card {
+                width: 150px;
+            }
+            
+            .designer-img {
+                height: 130px;
+            }
+            
+            .carousel-control {
+                width: 30px;
+                height: 30px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1270,7 +1394,7 @@
             
             /* Team Cards Even More Compact */
             .team-card {
-                height: 450px;
+                height: auto;
                 margin-bottom: 25px;
             }
             
@@ -1320,6 +1444,16 @@
                 padding: 0.5rem 1.5rem;
                 font-size: 0.9rem;
             }
+            
+            /* Designer Carousel */
+            .designer-card {
+                width: 130px;
+                padding: 10px;
+            }
+            
+            .designer-img {
+                height: 110px;
+            }
         }
     </style>
 </head>
@@ -1331,8 +1465,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center">
                 <div class="h-10 md:h-12 w-10 md:w-12 rounded-full bg-accent flex items-center justify-center">
-                    <!-- <span class="text-white font-bold text-lg">VoS</span> -->
-                    <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                    <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;" loading="lazy">
                 </div>
                 <span class="ml-2 md:ml-3 text-primary font-bold text-base md:text-xl">Voice of Scholars</span>
             </div>
@@ -1418,18 +1551,19 @@
         <div class="container mx-auto relative z-10">
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="text-white slide-up hero-content">
-                    <h1 class="text-3xl md:text-4xl lg:text-6xl font-black montserrat mb-4 leading-tight">
-                        From <span class="text-gold">Voices</span> to <span class="text-gold">Victory</span>
-                    </h1>
-                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6">
+                    <h3 class="text-3xl md:text-4xl lg:text-6xl font-black montserrat mb-4 leading-tight bounce-in">
+                        No <span class="text-gold">more wishes -</span> time <span class="text-gold">to make it happen</span>
+                    </h3>
+                
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 fade-in-right" style="animation-delay: 0.3s;">
                         From Promises to Progress
                     </h2>
-                    <p class="text-base md:text-lg mb-6 md:mb-8 text-gray-200">
+                    <p class="text-base md:text-lg mb-6 md:mb-8 text-gray-200 fade-in-right" style="animation-delay: 0.6s;">
                         Join the Voice of Scholars movement as we unite to transform USIU-Africa's Mastercard Foundation Scholars Program. Your voice matters. It's time to make real change happen.
                     </p>
                     
                     <!-- Countdown Timer -->
-                    <div class="bg-white bg-opacity-10 p-3 md:p-4 rounded-lg mb-6 md:mb-8">
+                    <div class="bg-white bg-opacity-10 p-3 md:p-4 rounded-lg mb-6 md:mb-8 fade-in-right" style="animation-delay: 0.9s;">
                         <h3 class="text-white text-center mb-2 font-bold">Election Day Countdown</h3>
                         <div class="countdown-container">
                             <div class="countdown-item">
@@ -1451,7 +1585,7 @@
                         </div>
                     </div>
                     
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-4 fade-in-right" style="animation-delay: 1.2s;">
                         <button class="vote-button pulse">
                             Campaign With Us
                         </button>
@@ -1462,67 +1596,34 @@
                 </div>
                 
                 <!-- Hero Slideshow -->
-                <div class="hero-slider" id="heroSlider">
+                <div class="hero-slider bounce-in" style="animation-delay: 0.5s;" id="heroSlider">
                     <div class="hero-slide active" style="background-color: rgba(0,0,0,0.3);">
-                        <img src="images/TheTeamEdited.jpg" alt="VoS Team" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
-                        <div class="hero-slide-content">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">Voice of Scholars Team</h2>
-                            <p>United for change, committed to progress!</p>
-                        </div>
+                        <img src="images/Team...png" alt="VoS Team" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;" loading="lazy">
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
-                        <img src="images/PrezooEdited.jpg" alt="Asafu Mamlaka" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
-                        <div class="hero-slide-content">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">Asafu Mamlaka</h2>
-                            <p>Candidate for Scholar President</p>
-                        </div>
+                        <img src="images/Asafu,,.png" alt="Asafu Mamlaka" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;" loading="lazy">
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
-                        <img src="images/Prezzo&viceedited.jpg" alt="Rencia Seda" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
-                        <div class="hero-slide-content">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">Rencia Seda</h2>
-                            <p>Candidate for Vice President</p>
-                        </div>
+                        <img src="images/Asafu & Rencia.png" alt="Rencia Seda" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;" loading="lazy">
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
-                        <img src="images/Renciaedited.jpg" alt="Jaili Abdalla" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
-                        <div class="hero-slide-content">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">Jaili Abdalla</h2>
-                            <p>Candidate for Scholar Support</p>
-                        </div>
+                        <img src="images/Rencia,,.png" alt="Jaili Abdalla" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;" loading="lazy">
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
-                        <img src="images/FinacneEdited.jpg" alt="Jaili Abdalla" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
-                        <div class="hero-slide-content">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">Iranzi Innocent</h2>
-                            <p>Safe accounting</p>
-                        </div>
+                        <img src="images/Nema,,.png" alt="Nema Cherop" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;" loading="lazy">
                     </div>
                     <div class="hero-slide" style="background-color: rgba(0,0,0,0.3);">
-                        <img src="images/Prezzo&viceedited.jpg" alt="Helefti Gudayu" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;">
-                        <div class="hero-slide-content">
-                            <h2 class="text-xl md:text-2xl font-bold mb-2">Helefti Gudayu</h2>
-                            <p>Candidate for Community Engagement</p>
-                        </div>
+                        <img src="images/Helefti,,.png" alt="Helefti Gudayu" class="w-full h-full object-cover absolute top-0 left-0" style="opacity: 0.8;" loading="lazy">
                     </div>
                 </div>
             </div>
             
             <!-- Campaign Mottos -->
-            <div class="mt-12 md:mt-16 bg-white bg-opacity-10 p-4 md:p-6 rounded-lg">
-                <h3 class="text-white font-bold text-lg md:text-xl mb-4 text-center">Campaign Mottos</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-white bg-opacity-20 p-4 rounded hover:bg-white hover:bg-opacity-30 transition">
-                        <p class="text-white font-medium text-center">"From Voices to Victory: From Promises to Progress"</p>
-                    </div>
+            <div class="mt-12 md:mt-16 bg-white bg-opacity-10 p-4 md:p-6 rounded-lg fade-in-right" style="animation-delay: 1.5s;">
+                <h3 class="text-white font-bold text-lg md:text-xl mb-4 text-center">Our Motto</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 gap-1">
                     <div class="bg-white bg-opacity-20 p-4 rounded hover:bg-white hover:bg-opacity-30 transition">
                         <p class="text-white font-medium text-center">"No more wishing – time to make it happen"</p>
-                    </div>
-                    <div class="bg-white bg-opacity-20 p-4 rounded hover:bg-white hover:bg-opacity-30 transition">
-                        <p class="text-white font-medium text-center">"For Scholars! By Scholars! With Scholars!"</p>
-                    </div>
-                    <div class="bg-white bg-opacity-20 p-4 rounded hover:bg-white hover:bg-opacity-30 transition">
-                        <p class="text-white font-medium text-center">"Your Voice! Our Mission! Real Change!"</p>
                     </div>
                 </div>
             </div>
@@ -1542,18 +1643,8 @@
             <div class="grid md:grid-cols-2 gap-8 md:gap-16">
                 <div class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border-t-4 border-primary transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-right">
                     <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">Vision Statement</h3>
-                    <p class="text-gray-700 leading-relaxed">
-                        We, the Voice of Scholars (VoS), stand as a resolute extension of the 2024 People's Voice 
-                        Party, a collective forged by scholars of the Mastercard Foundation Scholars Program at 
-                        United States International University-Africa, united by the commitment to addressing the 
-                        challenges and shedding light to the opportunities that define our shared voyage. Rooted 
-                        in the aspirations of scholars, our movement is strongly pegged to the conviction that the 
-                        strength of our community lies in its unity, equity, and relentless pursuit of progress.
-                    </p>
                     <p class="text-gray-700 leading-relaxed mt-4">
-                        This manifesto, under the visionary leadership of Mr. Asafu Mamlaka Etandala, our venerated 
-                        candidate for scholar president, articulates key priorities and pledges of VoS. It is a clarion 
-                        call to transform scholars' voices into tangible victories, ensuring that every scholar's 
+                        To transform scholars' voices into tangible victories, ensuring that every scholar's 
                         potential is nurtured, their concerns are addressed with urgency, and their contributions are 
                         celebrated as the cornerstone of a thriving academic community.
                     </p>
@@ -1561,20 +1652,18 @@
                 
                 <div class="flex flex-col gap-8">
                     <div class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border-t-4 border-gold transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-left" data-aos-delay="100">
-                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">Mission 1</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            To elevate the voice of scholars and tangibly bring to light everyday-issues that are often 
-                            neglected to ensure that every scholar feels included through the creation of platforms, 
-                            policies and projects that are inclusive and equitable.
-                        </p>
-                    </div>
-                    
-                    <div class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border-t-4 border-gold transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-left" data-aos-delay="200">
-                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">Mission 2</h3>
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">Mission</h3>
                         <p class="text-gray-700 leading-relaxed">
                             The Voice of Scholars (VoS) is passionately dedicated to amplifying the diverse voices of 
                             scholars, transforming their concerns, aspirations, and everyday challenges into 
                             meaningful action that fosters an inclusive, equitable, and empowering environment. 
+                        </p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 md:p-8 rounded-lg shadow-md border-t-4 border-gold transform transition hover:-translate-y-2 hover:shadow-xl" data-aos="fade-left" data-aos-delay="200">
+                        <h3 class="text-xl md:text-2xl font-bold mb-4 text-primary">How ?</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            
                             This will be instrumentalized through the establishment of dynamic platforms, advocacy 
                             for practically progressive change, and frontal spearheading of impactful projects that 
                             ensure every scholar feels listened to, valued, amply supported, and potently empowered 
@@ -1665,7 +1754,7 @@
                 The <span class="text-gold">Impact</span> We'll Make
             </h2>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
                 <div class="stat-item">
                     <div class="stat-counter" data-count="100">50</div>
                     <p class="text-gray-600 font-medium">% Commitment</p>
@@ -1675,7 +1764,7 @@
                 </div>
                 
                 <div class="stat-item">
-                    <div class="stat-counter" data-count="1200">500</div>
+                    <div class="stat-counter" data-count="1100">500</div>
                     <p class="text-gray-600 font-medium">Scholars Supported</p>
                     <div class="progress-container mt-3">
                         <div class="progress-bar-animated" data-percent="85"></div>
@@ -1687,14 +1776,6 @@
                     <p class="text-gray-600 font-medium">24/7 Response Time</p>
                     <div class="progress-container mt-3">
                         <div class="progress-bar-animated" data-percent="90"></div>
-                    </div>
-                </div>
-                
-                <div class="stat-item">
-                    <div class="stat-counter" data-count="6">0</div>
-                    <p class="text-gray-600 font-medium">Planned Scholars Projects</p>
-                    <div class="progress-container mt-3">
-                        <div class="progress-bar-animated" data-percent="95"></div>
                     </div>
                 </div>
             </div>
@@ -1818,185 +1899,212 @@
             </div>
         </div>
     </section>
-   <!-- Team Section -->
-<section id="team" class="py-12 md:py-20 px-4 bg-white relative">
-    <div class="parallax-bg" data-parallax-speed="0.2"></div>
-    <div class="container mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
-            Meet Our <span class="text-gold">Team</span>
-        </h2>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            <!-- President -->
-            <div class="team-card relative">
-                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Presidential Candidate</div>
-                <div class="team-card-inner">
-                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
-                        <img src="images/PrezzoHead.jpg" alt="Asafu Mamlaka" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+    
+    <!-- Team Section -->
+    <section id="team" class="py-12 md:py-20 px-4 bg-white relative">
+        <div class="parallax-bg" data-parallax-speed="0.2"></div>
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
+                Meet Our <span class="text-gold">Team</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- President -->
+                <div class="team-card">
+                    <div class="team-badge">Presidential Candidate</div>
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="images/Asafu,,.png" alt="Asafu Mamlaka" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+                            <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Asafu Mamlaka Etandala</h3>
+                            <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholars' Council President</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                                I'm your Voice of Scholars (VoS) candidate for President, here to lead with purpose and action. 
+                            </p>
+                        </div>
+                        <div class="team-card-back">
+                            <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Asafu Mamlaka Etandala</h3>
+                            <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                                I'll represent you at the Mastercard Foundation Scholar Council, ensuring your concerns—like reliable Wi-Fi, 
+                                safe housing, and timely stipend disbursements—reach the administration. I'll coordinate the council to deliver 
+                                on our manifesto, from advocating for reasonable living conditions to establishing a Rapid Response Squad for urgent issues.
+                            </p>
+                            <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                                "Leadership is not about being in charge. It's about taking care of those in your charge." – Simon Sinek
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vice President -->
+                <div class="team-card">
+                    <div class="team-badge">Vice Presidential Candidate</div>
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="images/Rencia,,.png" alt="Rencia Seda" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+                            <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Rencia Seda</h3>
+                            <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholars' Council Vice President</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                                I'm running for Vice President to support every scholar on campus. Under VoS's mission to amplify your voice.
+                            </p>
+                        </div>
+                        <div class="team-card-back">
+                            <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Rencia Seda</h3>
+                            <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                                I'll assist Asafu in tackling everyday challenges while coordinating key activities like Entrepreneurship and 
+                                Internship preparation with the Scholars Program Transition department. I'll also work with Baobab Ambassadors 
+                                to ensure all scholars are registered on the platform, fostering opportunities for growth.
+                            </p>
+                            <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                                "The best way to find yourself is to lose yourself in the service of others." – Mahatma Gandhi
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Finance Advisor -->
+                <div class="team-card">
+                    <div class="team-badge">Finance Advisor</div>
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="images/Nema,,.png" alt="Nema Cherop" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+                            <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Nema Cherop</h3>
+                            <p class="text-primary font-semibold text-center mb-3 md:mb-4">Finance Advisor</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                                I'm your VoS candidate for Finance Advisor, committed to financial empowerment.
+                            </p>
+                        </div>
+                        <div class="team-card-back">
+                            <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Nema Cherop</h3>
+                            <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                                As a Business student, I'll advise on budgeting and work with the Program Accountant to ensure stipends 
+                                are disbursed on time—no more delays that disrupt your plans. I'll introduce financial literacy workshops 
+                                to equip you for success, aligning with our mission for equitable support.
+                            </p>
+                            <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                                "Financial freedom is available to those who learn about it and work for it." – Robert Kiyosaki
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scholar Support Representative -->
+                <div class="team-card">
+                    <div class="team-badge">Scholar Support</div>
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="images/JailiNew.jpg" alt="Jaili Abdalla" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+                            <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Jaili Abdalla</h3>
+                            <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholar Support Representative</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                                I'm running for Scholar Support Representative to be your advocate and secretary.
+                            </p>
+                        </div>
+                        <div class="team-card-back">
+                            <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Jaili Abdalla</h3>
+                            <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                                I'll coordinate with Family Heads to address your welfare needs, ensuring issues like delayed stipends 
+                                or visa renewals are resolved swiftly through our Rapid Response Squad. I'll keep you informed with clear 
+                                communication, working closely with the Scholar Support office to make sure every scholar feels heard and valued.
+                            </p>
+                            <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                                "We rise by lifting others." – Robert Ingersoll
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-
-
-                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Asafu Mamlaka Etandala</h3>
-                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholars' Council President</p>
-                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
-                            I'm your Voice of Scholars (VoS) candidate for President, here to lead with purpose and action. 
-                            Inspired by our motto, "From Voices to Victory: From Promises to Progress."
-                        </p>
-                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
-                    </div>
-                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
-                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Asafu Mamlaka Etandala</h3>
-                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                            I'll represent you at the Mastercard Foundation Scholar Council, ensuring your concerns—like reliable Wi-Fi, 
-                            safe housing, and timely stipend disbursements—reach the administration. I'll coordinate the council to deliver 
-                            on our manifesto, from advocating for reasonable living conditions to establishing a Rapid Response Squad for urgent issues.
-                        </p>
-                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
-                            "Leadership is not about being in charge. It's about taking care of those in your charge." – Simon Sinek
+                <!-- Community Engagement -->
+                <div class="team-card">
+                    <div class="team-badge">Community Engagement</div>
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="images/Helefti,,.png" alt="Helefti Gudayu" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+                            <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Helefti Gudayu</h3>
+                            <p class="text-primary font-semibold text-center mb-3 md:mb-4">Community Engagement</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
+                                As your rep, I'll foster connections between scholars and the broader community
+                            </p>
+                        </div>
+                        <div class="team-card-back">
+                            <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Helefti Gudayu</h3>
+                            <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                                I'll create opportunities for meaningful collaborations and service projects that benefit both 
+                                scholars and the community at large. Through strategic partnerships and engaging events, we'll build 
+                                bridges that strengthen our collective impact.
+                            </p>
+                            <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                                "Alone we can do so little; together we can do so much." – Helen Keller
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Vice President -->
-            <div class="team-card relative">
-                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Vice Presidential Candidate</div>
-                <div class="team-card-inner">
-                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
-                        <img src="images/RenciaHead.jpg" alt="Rencia Seda" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
-                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Rencia Seda</h3>
-                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholars' Council Vice President</p>
-                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
-                            I'm running for Vice President to support every scholar on campus. Under VoS's mission to amplify your voice.
-                        </p>
-                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
-                    </div>
-                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
-                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Rencia Seda</h3>
-                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                            I'll assist Asafu in tackling everyday challenges while coordinating key activities like Entrepreneurship and 
-                            Internship preparation with the Scholars Program Transition department. I'll also work with Baobab Ambassadors 
-                            to ensure all scholars are registered on the platform, fostering opportunities for growth.
-                        </p>
-                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
-                            "The best way to find yourself is to lose yourself in the service of others." – Mahatma Gandhi
+                
+                <!-- Team Representative -->
+                <div class="team-card">
+                    <div class="team-badge">Vote for us</div>
+                    <div class="team-card-inner">
+                        <div class="team-card-front">
+                            <img src="images/Team...png" alt="Team" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
+                            <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Voice of Scholars</h3>
+                            <p class="text-primary font-semibold text-center mb-3 md:mb-4">The Team</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Finance Advisor -->
-            <div class="team-card relative">
-                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Finance Advisor</div>
-                <div class="team-card-inner">
-                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
-                        <img src="images/PrezooEdited.jpg" alt="Brian Omondi" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
-                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Iranzi Innocent</h3>
-                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Finance Advisor</p>
-                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
-                            I'm your VoS candidate for Finance Advisor, committed to financial empowerment.
-                        </p>
-                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
-                    </div>
-                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
-                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Brian Omondi</h3>
-                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                            As a Business student, I'll advise on budgeting and work with the Program Accountant to ensure stipends 
-                            are disbursed on time—no more delays that disrupt your plans. I'll introduce financial literacy workshops 
-                            to equip you for success, aligning with our mission for equitable support.
-                        </p>
-                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
-                            "Financial freedom is available to those who learn about it and work for it." – Robert Kiyosaki
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Scholar Support Representative -->
-            <div class="team-card relative">
-                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Scholar Support</div>
-                <div class="team-card-inner">
-                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
-                        <img src="images/JailiHead.jpg" alt="Jaili Abdalla" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
-                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Jaili Abdalla</h3>
-                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Scholar Support Representative</p>
-                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
-                            I'm running for Scholar Support Representative to be your advocate and secretary.
-                        </p>
-                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
-                    </div>
-                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
-                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Jaili Abdalla</h3>
-                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                            I'll coordinate with Family Heads to address your welfare needs, ensuring issues like delayed stipends 
-                            or visa renewals are resolved swiftly through our Rapid Response Squad. I'll keep you informed with clear 
-                            communication, working closely with the Scholar Support office to make sure every scholar feels heard and valued.
-                        </p>
-                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
-                            "We rise by lifting others." – Robert Ingersoll
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Inclusion Representative -->
-            <div class="team-card relative">
-                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Inclusion Representative</div>
-                <div class="team-card-inner">
-                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
-                        <img src="images/TeamHead.jpg" alt="Ezra" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
-                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Ezra</h3>
-                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">inclusion Representative</p>
-                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
-                            I'm your VoS candidate for Inclusion Representative, and as a refugee scholar, I understand the challenges of being heard.
-                        </p>
-                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
-                    </div>
-                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
-                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Ezra</h3>
-                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                            I'll represent scholars with disabilities and refugees, advocating for accessible facilities, equitable policies, 
-                            and onboarding support. Drawing from my experience in refugee-led initiatives, I'll ensure your voices shape our 
-                            council's decisions.
-                        </p>
-                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
-                            "inclusion is not a matter of political correctness. It is the key to growth." – Jesse Jackson
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Community Engagement -->
-            <div class="team-card relative">
-                <div class="team-badge absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Community Engagement</div>
-                <div class="team-card-inner">
-                    <div class="team-card-front bg-white p-4 rounded-lg shadow-md">
-                        <img src="images/financeHead.jpg" alt="Helefti Gudayu" class="w-full h-72 object-top rounded-t-lg" loading="lazy">
-                        <h3 class="text-lg md:text-xl font-bold text-primary text-center mt-4">Helefti Gudayu</h3>
-                        <p class="text-primary font-semibold text-center mb-3 md:mb-4">Community Engagement</p>
-                        <p class="text-gray-700 text-sm leading-relaxed mb-3 md:mb-4">
-                            As your Community Engagement representative, I'll foster connections between scholars and the broader community.
-                        </p>
-                        <!-- <p class="text-center text-gray-500 text-xs mt-2">(Flip card for more)</p> -->
-                    </div>
-                    <div class="team-card-back bg-blue-600 p-4 rounded-lg shadow-md text-white">
-                        <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Helefti Gudayu</h3>
-                        <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                            I'll create opportunities for meaningful collaborations and service projects that benefit both 
-                            scholars and the community at large. Through strategic partnerships and engaging events, we'll build 
-                            bridges that strengthen our collective impact.
-                        </p>
-                        <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
-                            "Alone we can do so little; together we can do so much." – Helen Keller
+                        <div class="team-card-back">
+                            <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Voice of Scholars</h3>
+                            <p class="text-sm leading-relaxed mb-4 md:mb-6">
+                                The Voice of Scholars (VoS) is here to transform the experience for every scholar at USIU-Africa, promising real change with our motto "From Voices to Victory!" 
+                                We'll fight for better living conditions with reliable Wi-Fi, safe dorms, and roommate choice, while bringing back financial support for transport and skill-building to help you grow. 
+                                We'll celebrate your achievements through regular events and online platforms, create a Rapid Response Squad to fix urgent issues like stipend or visa delays fast.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    
+    <!-- Designer Carousel Section -->
+    <section class="py-12 md:py-16 px-4 bg-gray-50" style="justify-content: baseline;">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12 text-primary montserrat">
+                The <span class="text-gold">Creative Team</span>
+            </h2>
+            
+            <div class="designer-carousel relative">
+                <div class="carousel-control carousel-prev" id="carousel-prev">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                
+                <div class="designer-carousel-inner" id="designer-carousel">
+                    <div class="designer-card">
+                        <img src="images/AnthonyThedesigner.jpg" alt="Designer 1" class="designer-img" loading="lazy">
+                        <h3 class="text-lg font-semibold text-primary mt-2">Anthony</h3>
+                        <p class="text-sm text-gray-600">Lead Designer</p>
+                        <p class="text-xs text-gray-500 mt-2">The brain behind the posters</p>
+                    </div>
+                    
+                    <div class="designer-card">
+                        <img src="images/IranziKonza.jpg" alt="Designer 2" class="designer-img" loading="lazy">
+                        <h3 class="text-lg font-semibold text-primary mt-2">Iranzi</h3>
+                        <p class="text-sm text-gray-600">Web Developer</p>
+                        <p class="text-xs text-gray-500 mt-2">The brain behind this platform</p>
+                    </div>
+                    
+                    <div class="designer-card">
+                        <img src="images/Maarifa.jpg" alt="Designer 3" class="designer-img" loading="lazy">
+                        <h3 class="text-lg font-semibold text-primary mt-2">Maarifa</h3>
+                        <p class="text-sm text-gray-600">Chief Organizer</p>
+                        <p class="text-xs text-gray-500 mt-2">The Campaign Team lead</p>
+                    </div>
+                
+                <div class="carousel-control carousel-next" id="carousel-next">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Timeline Section -->
-    <section id="timeline" class="py-12 md:py-20 px-4 bg-gray-50 relative">
+    <section id="timeline" class="py-12 md:py-20 px-4 bg-white relative">
         <div class="parallax-bg" data-parallax-speed="0.15"></div>
         <div class="container mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
@@ -2157,167 +2265,17 @@
         </div>
     </section>
     
-    <!-- FAQ Section -->
-    <section id="faq" class="py-12 md:py-20 px-4 bg-white relative">
-        <div class="parallax-bg" data-parallax-speed="0.1"></div>
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-primary montserrat">
-                Frequently Asked <span class="text-gold">Questions</span>
-            </h2>
-            
-            <div class="max-w-3xl mx-auto">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What is Voice of Scholars (VoS)?</span>
-                        <i class="fas fa-chevron-down faq-icon transition-transform"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Voice of Scholars (VoS) is a dedicated team running for the Mastercard Foundation Scholars Program Council at USIU-Africa. We're committed to amplifying scholars' voices, addressing everyday challenges, and creating an inclusive, supportive environment for all scholars.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How will VoS improve living conditions for scholars?</span>
-                        <i class="fas fa-chevron-down faq-icon transition-transform"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>We'll advocate for reliable Wi-Fi, comfortable housing, and the right to choose/change roommates when necessary. By working directly with administration and housing authorities, we'll ensure scholars have the conducive living environment promised in the scholars' handbook.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What is the 'Scholars-First' Rapid Response Squad?</span>
-                        <i class="fas fa-chevron-down faq-icon transition-transform"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>The Rapid Response Squad is our initiative to address urgent scholar issues promptly. This dedicated team will cut through bureaucracy to resolve time-sensitive matters like delayed stipends, visa renewals, and travel complications, ensuring scholars receive timely assistance when they need it most.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How can I get involved with the VoS campaign?</span>
-                        <i class="fas fa-chevron-down faq-icon transition-transform"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>You can join our campaign by spreading the word to fellow scholars, attending our campaign events during April 16th-26th, sharing your ideas and concerns with team members, and of course, by voting for Voice of Scholars on April 27th at the Lillian K. Beam Building.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What makes VoS different from previous councils?</span>
-                        <i class="fas fa-chevron-down faq-icon transition-transform"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>VoS stands out through our emphasis on actionable solutions rather than just promises. We're focused on practical initiatives like the Rapid Response Squad, regular scholar recognition events, and revitalizing extra-academic support. Our diverse team brings varied perspectives, ensuring we represent all scholars' needs.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Call to Action -->
-    <section class="py-12 md:py-20 px-4 bg-gradient-to-r from-secondary to-secondary-dark text-white relative" style="background-color: #328f5c !important">
-        <div class="orange-wave"></div>
-        <div class="container mx-auto relative z-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 md:mb-6 montserrat">Ready to Make Your Voice Heard?</h2>
-                <p class="text-base md:text-lg mb-8 md:mb-10">Join us in transforming USIU-Africa's Mastercard Foundation Scholars Program. Together, we'll turn promises into progress.</p>
-                
-                <div class="flex flex-wrap gap-4 md:gap-6 justify-center">
-                    <button class="vote-button pulse flex items-center">
-                        <i class="fas fa-vote-yea mr-2"></i>
-                        Vote on April 27th
-                    </button>
-                    <a href="#team" class="bg-white text-primary hover:bg-gold hover:text-dark transition px-4 md:px-6 py-2 md:py-3 rounded-full font-bold flex items-center">
-                        <i class="fas fa-users mr-2"></i>
-                        Meet Our Team
-                    </a>
-                </div>
-                
-                <div class="mt-10 md:mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-bullhorn text-3xl md:text-4xl mb-3 md:mb-4"></i>
-                        <h3 class="text-lg md:text-xl font-bold mb-2">Spread the Word</h3>
-                        <p>Share our campaign with your fellow scholars</p>
-                    </div>
-                    
-                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-comments text-3xl md:text-4xl mb-3 md:mb-4"></i>
-                        <h3 class="text-lg md:text-xl font-bold mb-2">Join the Conversation</h3>
-                        <p>Attend our campaign events and debates</p>
-                    </div>
-                    
-                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-lightbulb text-3xl md:text-4xl mb-3 md:mb-4"></i>
-                        <h3 class="text-lg md:text-xl font-bold mb-2">Share Your Ideas</h3>
-                        <p>We're always open to suggestions and feedback</p>
-                    </div>
-                    
-                    <div class="bg-white bg-opacity-10 p-4 md:p-6 rounded-lg hover:bg-opacity-20 transition">
-                        <i class="fas fa-hands-helping text-3xl md:text-4xl mb-3 md:mb-4"></i>
-                        <h3 class="text-lg md:text-xl font-bold mb-2">Volunteer</h3>
-                        <p>Help us in our campaign activities</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <footer class="bg-gray-900 text-white py-8 md:py-10 px-4">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-10">
                 <div class="mb-6 md:mb-0">
-                    <!-- <div class="flex items-center">
-                        <div class="h-10 md:h-12 w-10 md:w-12 rounded-full bg-accent flex items-center justify-center">
-                            <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
-                        </div>
+                    <div class="flex items-center">
                         <span class="ml-3 text-white font-bold text-lg md:text-xl">Voice of Scholars</span>
-                    </div> -->
-                    <!-- <p class="text-gray-400 mt-2">Mastercard Foundation Scholars Program, USIU-Africa</p> -->
+                    </div>
                 </div>
                 
                 <div class="flex flex-col sm:flex-row gap-6 md:gap-8">
-                    <!-- <div>
-                        <h4 class="text-accent font-bold mb-3">Quick Links</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#vision" class="text-gray-400 hover:text-white transition">Vision</a></li>
-                            <li><a href="#manifesto" class="text-gray-400 hover:text-white transition">Manifesto</a></li>
-                            <li><a href="#team" class="text-gray-400 hover:text-white transition">Our Team</a></li>
-                            <li><a href="#timeline" class="text-gray-400 hover:text-white transition">Timeline</a></li>
-                        </ul>
-                    </div>
-                    
                     <div>
-                        <h4 class="text-accent font-bold mb-3">Contact</h4>
-                        <ul class="space-y-2">
-                            <li class="text-gray-400"><i class="fas fa-envelope mr-2"></i> vos@scholars.usiu.ac.ke</li>
-                            <li class="text-gray-400"><i class="fas fa-phone mr-2"></i> +254 700 000 000</li>
-                            <li class="text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i> USIU-Africa, Nairobi</li>
-                        </ul>
-                    </div> -->
-                    <div class="flex items-center">
-                        <!-- <div class="h-10 md:h-12 w-10 md:w-12 rounded-full bg-accent flex items-center justify-center">
-                            <img src="images/Logoedited.jpg" alt="Logo" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
-                        </div> -->
-                        <span class="ml-3 text-white font-bold text-lg md:text-xl">Voice of Scholars</span>
-                    </div>
-                    
-                    <div>
-                        <!-- <h4 class="text-accent font-bold mb-3">Follow Us</h4> -->
                         <div class="flex space-x-4">
                             <a href="#" class="social-btn social-twitter"><i class="fab fa-twitter"></i></a>
                             <a href="#" class="social-btn social-instagram"><i class="fab fa-instagram"></i></a>
@@ -2330,7 +2288,7 @@
             
             <div class="border-t border-gray-800 pt-6 md:pt-8 text-center text-gray-500 text-sm">
                 <p>© 2025 Voice of Scholars.</p>
-                <p class="mt-2">By VoS Creative Team : IRANZI INNOCENT</p>
+                <p class="mt-2">By VoS Creative Team : IRANZI & ANTHONY</p>
             </div>
         </div>
     </footer>
@@ -2338,241 +2296,303 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
-        });
-        
-        // Progress bar
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
-            
-            // Navigation highlighting
-            const sections = document.querySelectorAll("section[id]");
-            const navLinks = document.querySelectorAll(".nav-pill");
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute("id");
-                
-                if (winScroll >= sectionTop && winScroll < sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove("active");
-                        if (link.getAttribute("href") === "#" + sectionId) {
-                            link.classList.add("active");
-                        }
-                    });
-                }
+        // Initialize AOS with Intersection Observer
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false,
+                disable: 'mobile'
             });
             
-            // Check for manifesto items and animate them
-            const manifestoItems = document.querySelectorAll('.manifesto-item');
-            manifestoItems.forEach(item => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < window.innerHeight - 100) {
-                    item.classList.add('show');
-                }
+            // Use Intersection Observer for animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            // Observer for manifesto items
+            const manifestoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        manifestoObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.manifesto-item').forEach(item => {
+                manifestoObserver.observe(item);
             });
             
-            // Check for why vote items and animate them
-            const whyVoteItems = document.querySelectorAll('.why-vote-item');
-            whyVoteItems.forEach((item, index) => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < window.innerHeight - 100) {
-                    setTimeout(() => {
-                        item.classList.add('show');
-                    }, index * 100);
-                }
-            });
-            
-            // Check for stat items and animate them
-            const statItems = document.querySelectorAll('.stat-item');
-            statItems.forEach((item, index) => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < window.innerHeight - 100) {
-                    setTimeout(() => {
-                        item.classList.add('show');
+            // Observer for stat items with counter animation
+            const statObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
                         
                         // Start counter animation
-                        const counter = item.querySelector('.stat-counter');
+                        const counter = entry.target.querySelector('.stat-counter');
                         const target = parseInt(counter.getAttribute('data-count'));
                         animateCounter(counter, 0, target, 2000);
                         
                         // Start progress bar animation
-                        const progressBar = item.querySelector('.progress-bar-animated');
+                        const progressBar = entry.target.querySelector('.progress-bar-animated');
                         const percent = parseInt(progressBar.getAttribute('data-percent'));
-                        animateProgressBar(progressBar, percent);
-                    }, index * 200);
-                }
+                        progressBar.style.width = percent + '%';
+                        
+                        statObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.stat-item').forEach(item => {
+                statObserver.observe(item);
             });
             
-            // Check for timeline items and animate them
-            const timelineItems = document.querySelectorAll('.timeline-item');
-            timelineItems.forEach((item, index) => {
-                const itemTop = item.getBoundingClientRect().top;
-                if (itemTop < window.innerHeight - 100) {
-                    setTimeout(() => {
-                        item.classList.add('show');
-                    }, index * 150);
-                }
+            // Observer for timeline items
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                timelineObserver.observe(item);
             });
-        };
-        
-        // Hero Slider
-        let currentSlide = 0;
-        const heroSlides = document.querySelectorAll('.hero-slide');
-        const totalSlides = heroSlides.length;
-        
-        function showSlide(index) {
-            heroSlides.forEach(slide => slide.classList.remove('active'));
-            heroSlides[index].classList.add('active');
-            currentSlide = index;
-        }
-        
-        function nextSlide() {
-            showSlide((currentSlide + 1) % totalSlides);
-        }
-        
-        function prevSlide() {
-            showSlide((currentSlide - 1 + totalSlides) % totalSlides);
-        }
-        
-        // Auto rotate slides
-        setInterval(nextSlide, 5000);
-        
-        // Counter animation function
-        function animateCounter(element, start, end, duration) {
-            if (start === end) return;
-            const range = end - start;
-            let current = start;
-            const increment = end > start ? 1 : -1;
-            const stepTime = Math.abs(Math.floor(duration / range));
-            const timer = setInterval(() => {
-                current += increment;
-                element.textContent = current;
-                if (current === end) {
-                    clearInterval(timer);
+            
+            // Initialize progress bar
+            window.addEventListener('scroll', updateProgressBar);
+            
+            function updateProgressBar() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("progressBar").style.width = scrolled + "%";
+                
+                // Navigation highlighting
+                highlightNavigation();
+            }
+            
+            function highlightNavigation() {
+                const sections = document.querySelectorAll("section[id]");
+                const navLinks = document.querySelectorAll(".nav-pill");
+                const scrollPosition = window.scrollY + 200;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute("id");
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove("active");
+                            if (link.getAttribute("href") === "#" + sectionId) {
+                                link.classList.add("active");
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Hero Slider - Optimized
+            let currentSlide = 0;
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            const totalSlides = heroSlides.length;
+            let slideInterval;
+            
+            function showSlide(index) {
+                heroSlides.forEach(slide => slide.classList.remove('active'));
+                
+                // Preload next image if it exists
+                if (index < totalSlides - 1) {
+                    const nextImage = heroSlides[index + 1].querySelector('img');
+                    if (nextImage && !nextImage.complete) {
+                        nextImage.setAttribute('loading', 'eager');
+                    }
                 }
-            }, stepTime);
-        }
-        
-        // Progress bar animation function
-        function animateProgressBar(element, targetPercent) {
-            element.style.width = targetPercent + '%';
-        }
-        
-        // FAQ Accordion
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                faqItem.classList.toggle('active');
+                
+                heroSlides[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                showSlide((currentSlide + 1) % totalSlides);
+            }
+            
+            function startSlideShow() {
+                if (slideInterval) clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Start slideshow
+            startSlideShow();
+            
+            // Preload first few images
+            for (let i = 0; i < Math.min(3, totalSlides); i++) {
+                const img = heroSlides[i].querySelector('img');
+                if (img) img.setAttribute('loading', 'eager');
+            }
+            
+            // Counter animation function - optimized
+            function animateCounter(element, start, end, duration) {
+                if (start === end) return;
+                
+                const range = end - start;
+                const increment = end > start ? 1 : -1;
+                const stepTime = Math.abs(Math.floor(duration / range));
+                let current = start;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    element.textContent = current;
+                    if (current === end) {
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+            }
+            
+            // FAQ Accordion
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    
+                    // Close other open FAQs
+                    document.querySelectorAll('.faq-item.active').forEach(item => {
+                        if (item !== faqItem) {
+                            item.classList.remove('active');
+                        }
+                    });
+                    
+                    faqItem.classList.toggle('active');
+                });
             });
-        });
-        
-        // Mobile Menu
-        const menuToggle = document.querySelector('.menu-toggle');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const menuOverlay = document.querySelector('.menu-overlay');
-        
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-        
-        menuOverlay.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
+            
+            // Mobile Menu Handling
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const menuOverlay = document.querySelector('.menu-overlay');
+            
+            menuToggle.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', closeMenu);
+            
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+            
+            function toggleMenu() {
+                menuToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                menuOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            }
+            
+            function closeMenu() {
                 menuToggle.classList.remove('active');
                 mobileMenu.classList.remove('active');
                 menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
-            });
-        });
-        
-        // Parallax effect for backgrounds
-        const parallaxElements = document.querySelectorAll('.parallax-bg');
-        
-        function updateParallax() {
-            parallaxElements.forEach(element => {
-                const speed = parseFloat(element.getAttribute('data-parallax-speed'));
-                const yPos = -(window.scrollY * speed);
-                element.style.transform = `translateY(${yPos}px)`;
-            });
-        }
-        
-        window.addEventListener('scroll', updateParallax);
-        
-        // Countdown Timer
-        function updateCountdown() {
-            const electionDate = new Date('April 27, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = electionDate - now;
+            }
             
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Designer Carousel Controls
+            const carousel = document.getElementById('designer-carousel');
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
             
-            document.getElementById('countdown-days').innerText = days.toString().padStart(2, '0');
-            document.getElementById('countdown-hours').innerText = hours.toString().padStart(2, '0');
-            document.getElementById('countdown-minutes').innerText = minutes.toString().padStart(2, '0');
-            document.getElementById('countdown-seconds').innerText = seconds.toString().padStart(2, '0');
-        }
-        
-        // Update countdown every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
-        // Run initial scroll effects
-        window.dispatchEvent(new Event('scroll'));
-        
-        // Add mobile-specific code for ensuring team card visibility
-        function checkTeamCards() {
-            // Force display of team cards on mobile
-            if (window.innerWidth < 768) {
+            prevBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: -250, behavior: 'smooth' });
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                carousel.scrollBy({ left: 250, behavior: 'smooth' });
+            });
+            
+            // Countdown Timer
+            function updateCountdown() {
+                const electionDate = new Date('April 27, 2025 00:00:00').getTime();
+                const now = new Date().getTime();
+                const distance = electionDate - now;
+                
+                if (distance < 0) {
+                    document.getElementById('countdown-days').innerText = "00";
+                    document.getElementById('countdown-hours').innerText = "00";
+                    document.getElementById('countdown-minutes').innerText = "00";
+                    document.getElementById('countdown-seconds').innerText = "00";
+                    return;
+                }
+                
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdown-days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('countdown-hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('countdown-minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('countdown-seconds').innerText = seconds.toString().padStart(2, '0');
+            }
+            
+            // Initial update
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Mobile-specific adjustments
+            function handleMobileAdjustments() {
+                if (window.innerWidth < 768) {
+                    document.querySelectorAll('.team-card').forEach(card => {
+                        // Make cards stacked on mobile
+                        const front = card.querySelector('.team-card-front');
+                        const back = card.querySelector('.team-card-back');
+                        
+                        if (front && back) {
+                            front.style.position = 'relative';
+                            back.style.position = 'relative';
+                            back.style.transform = 'none';
+                            front.style.backfaceVisibility = 'visible';
+                            back.style.backfaceVisibility = 'visible';
+                        }
+                    });
+                } else {
+                    document.querySelectorAll('.team-card').forEach(card => {
+                        // Restore flip effect on desktop
+                        const front = card.querySelector('.team-card-front');
+                        const back = card.querySelector('.team-card-back');
+                        
+                        if (front && back) {
+                            front.style.position = 'absolute';
+                            back.style.position = 'absolute';
+                            back.style.transform = 'rotateY(180deg)';
+                            front.style.backfaceVisibility = 'hidden';
+                            back.style.backfaceVisibility = 'hidden';
+                        }
+                    });
+                }
+            }
+            
+            // Run on load and resize
+            window.addEventListener('load', handleMobileAdjustments);
+            window.addEventListener('resize', handleMobileAdjustments);
+            
+            // For touch devices, handle card flip
+            if ('ontouchstart' in window || navigator.maxTouchPoints) {
                 document.querySelectorAll('.team-card').forEach(card => {
-                    card.style.display = 'block';
-                    // Ensure all content is visible
-                    card.style.overflow = 'visible';
+                    card.addEventListener('click', function(e) {
+                        if (window.innerWidth >= 768 && e.target.tagName !== 'A') {
+                            const inner = this.querySelector('.team-card-inner');
+                            inner.style.transform = inner.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+                        }
+                    });
                 });
             }
-        }
-        
-        // Run on page load and resize
-        window.addEventListener('load', checkTeamCards);
-        window.addEventListener('resize', checkTeamCards);
-        
-        // For touch devices, make card flip on tap instead of hover
-        if ('ontouchstart' in window || navigator.maxTouchPoints) {
-            document.querySelectorAll('.team-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // Only flip if we clicked the card itself, not a link inside it
-                    if (e.target.tagName !== 'A') {
-                        const inner = this.querySelector('.team-card-inner');
-                        if (inner.style.transform === 'rotateY(180deg)') {
-                            inner.style.transform = 'rotateY(0deg)';
-                        } else {
-                            inner.style.transform = 'rotateY(180deg)';
-                        }
-                    }
-                });
-            });
-        }
+            
+            // Initial scroll check to activate elements in viewport
+            updateProgressBar();
+        });
     </script>
 </body>
 </html>
