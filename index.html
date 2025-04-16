@@ -749,6 +749,24 @@
             background: url('https://cdn.jsdelivr.net/gh/sdras/cssgridgenerator@master/wave.svg') repeat-x;
             background-size: 1000px 100px;
         }
+
+
+        /* Add this to your existing <style> section */
+    @media (max-width: 1023px) {
+        .team-card-inner {
+            transform-style: flat !important;
+            transition: none !important;
+        }
+        .team-card:hover .team-card-inner {
+            transform: none !important;
+        }
+        .team-card-front, .team-card-back {
+            position: relative !important;
+            transform: none !important;
+            backface-visibility: visible !important;
+            height: auto !important;
+        }
+    }
         
         /* Social Media Buttons */
         .social-btn {
@@ -2057,7 +2075,7 @@
                 
                 <!-- Inclusion Representative -->
                 <div class="team-card">
-                    <div class="team-badge">Alfred Giranyutha</div>
+                    <div class="team-badge">Inclusion Representative</div>
                     <div class="team-card-inner">
                         <div class="team-card-front">
                             <img src="images/AlfredS6.png" alt="Team" class="w-full h-72 object-cover object-top rounded-t-lg" loading="lazy">
@@ -2067,9 +2085,14 @@
                         <div class="team-card-back">
                             <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Alfred Giranyutha</h3>
                             <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                                The Voice of Scholars (VoS) is here to transform the experience for every scholar at USIU-Africa, promising real change with our motto "From Voices to Victory!" 
-                                We'll fight for better living conditions with reliable Wi-Fi, safe dorms, and roommate choice, while bringing back financial support for transport and skill-building to help you grow. 
-                                We'll celebrate your achievements through regular events and online platforms, create a Rapid Response Squad to fix urgent issues like stipend or visa delays fast.
+                                I’m Alfred, your VoS candidate for Inclusion Representative, I understand the challenges of being heard. 
+                                I’ll represent scholars with disabilities and refugees, advocating for accessible facilities, equitable policies, and onboarding support. 
+                                Drawing from my experience in various inclusivity-led initiatives, I’ll ensure your voices shape our council’s decisions. 
+                            </p>
+                            <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
+                                "Inclusion is not a matter of political correctness. It is the key to growth." – Jesse Jackson
+                            </div>
+                        </div>
                             </p>
                         </div>
                     </div>
@@ -2508,11 +2531,13 @@
             });
             
             // Mobile Menu Handling
-            const menuToggle = document.querySelector('.menu-toggle');
+            const menuToggles = document.querySelectorAll('.menu-toggle'); // Select both toggles
             const mobileMenu = document.querySelector('.mobile-menu');
             const menuOverlay = document.querySelector('.menu-overlay');
             
-            menuToggle.addEventListener('click', toggleMenu);
+            menuToggles.forEach(toggle => {
+                toggle.addEventListener('click', toggleMenu);
+            });
             menuOverlay.addEventListener('click', closeMenu);
             
             document.querySelectorAll('.mobile-menu a').forEach(link => {
@@ -2520,14 +2545,14 @@
             });
             
             function toggleMenu() {
-                menuToggle.classList.toggle('active');
+                menuToggles.forEach(toggle => toggle.classList.toggle('active'));
                 mobileMenu.classList.toggle('active');
                 menuOverlay.classList.toggle('active');
                 document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
             }
             
             function closeMenu() {
-                menuToggle.classList.remove('active');
+                menuToggles.forEach(toggle => toggle.classList.remove('active'));
                 mobileMenu.classList.remove('active');
                 menuOverlay.classList.remove('active');
                 document.body.style.overflow = '';
@@ -2577,32 +2602,37 @@
             
             // Mobile-specific adjustments
             function handleMobileAdjustments() {
-                if (window.innerWidth < 768) {
+                if (window.innerWidth < 1024) {
                     document.querySelectorAll('.team-card').forEach(card => {
-                        // Make cards stacked on mobile
+                        // Disable flip effect on mobile and tablets
                         const front = card.querySelector('.team-card-front');
                         const back = card.querySelector('.team-card-back');
+                        const inner = card.querySelector('.team-card-inner');
                         
-                        if (front && back) {
+                        if (front && back && inner) {
                             front.style.position = 'relative';
                             back.style.position = 'relative';
                             back.style.transform = 'none';
                             front.style.backfaceVisibility = 'visible';
                             back.style.backfaceVisibility = 'visible';
+                            inner.style.transform = 'none';
+                            inner.style.transformStyle = 'flat';
                         }
                     });
                 } else {
                     document.querySelectorAll('.team-card').forEach(card => {
-                        // Restore flip effect on desktop
+                        // Enable flip effect on desktop
                         const front = card.querySelector('.team-card-front');
                         const back = card.querySelector('.team-card-back');
+                        const inner = card.querySelector('.team-card-inner');
                         
-                        if (front && back) {
+                        if (front && back && inner) {
                             front.style.position = 'absolute';
                             back.style.position = 'absolute';
                             back.style.transform = 'rotateY(180deg)';
                             front.style.backfaceVisibility = 'hidden';
                             back.style.backfaceVisibility = 'hidden';
+                            inner.style.transformStyle = 'preserve-3d';
                         }
                     });
                 }
@@ -2616,7 +2646,7 @@
             if ('ontouchstart' in window || navigator.maxTouchPoints) {
                 document.querySelectorAll('.team-card').forEach(card => {
                     card.addEventListener('click', function(e) {
-                        if (window.innerWidth >= 768 && e.target.tagName !== 'A') {
+                        if (window.innerWidth >= 1024 && e.target.tagName !== 'A') {
                             const inner = this.querySelector('.team-card-inner');
                             inner.style.transform = inner.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
                         }
