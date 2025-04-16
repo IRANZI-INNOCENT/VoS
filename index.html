@@ -1466,16 +1466,22 @@
         }
     </style>
 
-    <!-- Matomo Tag Manager -->
+<!-- Matomo -->
 <script>
-  var _mtm = window._mtm = window._mtm || [];
-  _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
   (function() {
+    var u="https://vos.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.async=true; g.src='https://cdn.matomo.cloud/vos.matomo.cloud/container_79mgjTsU.js'; s.parentNode.insertBefore(g,s);
+    g.async=true; g.src='https://cdn.matomo.cloud/vos.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<!-- End Matomo Tag Manager -->
+<!-- End Matomo Code -->
+
 </head>
 <body>
     <div class="progress-bar" id="progressBar"></div>
