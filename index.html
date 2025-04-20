@@ -1035,7 +1035,7 @@
             max-width: 80%;
         }
         
-        /* Countdown Timer */
+        /* Countdown Timer - UPDATED */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -2173,9 +2173,9 @@
                         <div class="team-card-back">
                             <h3 class="text-lg md:text-xl font-bold text-center mb-3 md:mb-4">Alfred Giranyutha</h3>
                             <p class="text-sm leading-relaxed mb-4 md:mb-6">
-                                I’m Alfred, your VoS candidate for Inclusion Representative, I understand the challenges of being heard. 
-                                I’ll represent scholars with disabilities and refugees, advocating for accessible facilities, equitable policies, and onboarding support. 
-                                Drawing from my experience in various inclusivity-led initiatives, I’ll ensure your voices shape our council’s decisions. 
+                                I'm Alfred, your VoS candidate for Inclusion Representative, I understand the challenges of being heard. 
+                                I'll represent scholars with disabilities and refugees, advocating for accessible facilities, equitable policies, and onboarding support. 
+                                Drawing from my experience in various inclusivity-led initiatives, I'll ensure your voices shape our council's decisions. 
                             </p>
                             <div class="quote text-sm bg-white bg-opacity-10 p-2 rounded">
                                 "Inclusion is not a matter of political correctness. It is the key to growth." – Jesse Jackson
@@ -2689,17 +2689,20 @@
             const prevBtn = document.getElementById('carousel-prev');
             const nextBtn = document.getElementById('carousel-next');
             
-            prevBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: -250, behavior: 'smooth' });
-            });
+            if (carousel && prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: -250, behavior: 'smooth' });
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: 250, behavior: 'smooth' });
+                });
+            }
             
-            nextBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: 250, behavior: 'smooth' });
-            });
-            
-            // Countdown Timer
+            // Countdown Timer - FIXED VERSION
             function updateCountdown() {
-                const electionDate = new Date('April 27, 2025 00:00:00').getTime();
+                // Use ISO format for more reliable date parsing across browsers
+                const electionDate = new Date('2025-04-27T00:00:00').getTime();
                 const now = new Date().getTime();
                 const distance = electionDate - now;
                 
@@ -2724,7 +2727,8 @@
             
             // Initial update
             updateCountdown();
-            setInterval(updateCountdown, 1000);
+            // Store interval ID for better control
+            const countdownInterval = setInterval(updateCountdown, 1000);
             
             // Mobile-specific adjustments
             function handleMobileAdjustments() {
